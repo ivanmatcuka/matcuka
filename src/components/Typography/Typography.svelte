@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { TailwindColors } from '../../types';
 
-	export type Font = 'mono' | 'main';
-	export type Size = 'sm' | 'md' | 'xl' | '2xl' | '3xl' | '4xl';
 	export type Variant =
 		| 'h1'
 		| 'h2'
@@ -68,9 +66,9 @@
 		'primary-900': 'text-primary-900'
 	};
 
-	const { variant, text, color = 'neutral-black' }: Props = $props();
+	const { variant, text, color = 'neutral-white' }: Props = $props();
 </script>
 
-<span class={`${map[variant]} ${fontColors[color]}`}>
+<span class={`${map[variant]} ${fontColors[color]} block`}>
 	{text}
 </span>

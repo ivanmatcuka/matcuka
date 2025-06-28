@@ -1,6 +1,6 @@
 <script module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import WorkCard from './WorkCard.svelte';
+	import WorkCard from '../../components/WorkCard/WorkCard.svelte';
 
 	const { Story } = defineMeta({
 		title: 'Example/WorkCard',
