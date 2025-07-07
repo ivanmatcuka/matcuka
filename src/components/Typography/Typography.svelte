@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { TailwindColors } from '../../types';
 
 	export type Variant =
@@ -13,18 +14,18 @@
 		| 'body2-semibold';
 
 	interface Props {
-		text: string;
 		variant: Variant;
 		color?: keyof TailwindColors;
+		children: Snippet;
 	}
 
 	const map: Record<Variant, string> = {
 		h1: 'text-4xl font-bold font-main',
 		h2: 'text-3xl font-bold font-main',
-		h3: 'text-2xl font-bold font-main',
+		h3: 'text-2xl font-semibold font-main',
 
 		subtitle1: 'text-2xl font-mono',
-		subtitle2: 'text-xl font-mono',
+		subtitle2: 'text-md font-semibold font-mono',
 
 		body1: 'text-md font-mono',
 		body2: 'text-sm font-mono',
@@ -66,9 +67,9 @@
 		'primary-900': 'text-primary-900'
 	};
 
-	const { variant, text, color = 'neutral-white' }: Props = $props();
+	const { variant, color = 'neutral-white', children }: Props = $props();
 </script>
 
-<span class={`${map[variant]} ${fontColors[color]} block`}>
-	{text}
+<span class={`${map[variant]} ${fontColors[color]}`}>
+	{@render children?.()}
 </span>
