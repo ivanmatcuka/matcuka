@@ -17,6 +17,7 @@
 		variant: Variant;
 		color?: keyof TailwindColors;
 		children: Snippet;
+		class?: string;
 	}
 
 	const map: Record<Variant, string> = {
@@ -67,9 +68,9 @@
 		'primary-900': 'text-primary-900'
 	};
 
-	const { variant, color = 'neutral-white', children }: Props = $props();
+	const { variant, color = 'neutral-white', children, class: customClass }: Props = $props();
 </script>
 
-<span class={`${map[variant]} ${fontColors[color]}`}>
+<span class={`${customClass} ${map[variant]} ${fontColors[color]}`}>
 	{@render children?.()}
 </span>

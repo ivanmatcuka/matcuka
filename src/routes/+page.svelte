@@ -3,6 +3,13 @@
 	import Header from '$components/Header/Header.svelte';
 	import Section from '$components/Sections/Section.svelte';
 	import Typography from '$components/Typography/Typography.svelte';
+	import { onMount } from 'svelte';
+	import Button from '$components/Button/Button.svelte';
+	import WorkCard from '$components/WorkCard/WorkCard.svelte';
+
+	onMount(() => {
+		fetch('/auth');
+	});
 </script>
 
 <div class="flex flex-col items-center gap-20 bg-primary-900 py-10">
@@ -13,6 +20,15 @@
 			<Typography variant="subtitle1" color="accent-200">web? mobile? design?</Typography>
 			<br />
 			<Typography variant="subtitle1" color="accent-200">can do_</Typography>
+			<br />
+			<div class="mt-4">
+				<Button
+					bgColor="bg-primary-300"
+					textColor="text-primary-900"
+					hoverBgColor="hover:bg-neutral-white"
+					hoverTextColor="hover:text-primary-900">Download CV</Button
+				>
+			</div>
 		</div>
 	</div>
 	<Section>
@@ -78,6 +94,38 @@
 <div class="bg-neutral-white">
 	<Section>
 		<Typography variant="h2" color="neutral-black">my work</Typography>
+		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+			<WorkCard
+				title="botspot"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+			<WorkCard
+				title="politzek"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+			<WorkCard
+				title="cofenster"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+			<WorkCard
+				title="botspot"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+			<WorkCard
+				title="politzek"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+			<WorkCard
+				title="cofenster"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
+				imageUrl="/images/work/web-development.jpg"
+			/>
+		</div>
 	</Section>
 </div>
 
