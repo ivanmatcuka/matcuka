@@ -6,9 +6,11 @@
 	import { onMount } from 'svelte';
 	import Button from '$components/Button/Button.svelte';
 	import WorkCard from '$components/WorkCard/WorkCard.svelte';
+	import { CMSService } from '../services/cmsService';
 
-	onMount(() => {
-		fetch('/auth');
+	onMount(async () => {
+		const workCards = await CMSService.getWorkCards();
+		console.log(workCards);
 	});
 </script>
 
