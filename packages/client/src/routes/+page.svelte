@@ -9,8 +9,8 @@
 	import { CMSService } from '../services/cmsService';
 
 	onMount(async () => {
-		const workCards = await CMSService.getWorkCards();
-		console.log(workCards);
+		// const workCards = await CMSService.getWorkCards();
+		// console.log(workCards);
 	});
 </script>
 

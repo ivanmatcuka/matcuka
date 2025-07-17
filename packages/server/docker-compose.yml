@@ -1,0 +1,32 @@
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: matcuka-strapi
+    container_name: matcuka-strapi
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=production
+      # Add your env variables here or mount .env file
+    volumes:
+      - ./packages/server/public:/app/public
+      - ./packages/server/.tmp:/app/.tmp
+      - ./packages/server/uploads:/app/uploads
+    restart: unless-stopped
+
+  strapi-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: matcuka-strapi-dev
+    container_name: matcuka-strapi-dev
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+      # Add your env variables here or mount .env file
+    volumes:
+      - .:/app
+    restart: unless-stopped
