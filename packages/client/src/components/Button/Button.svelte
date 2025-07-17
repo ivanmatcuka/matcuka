@@ -8,6 +8,7 @@
 		hoverBgColor?: string;
 		hoverTextColor?: string;
 		children: Snippet;
+		size?: 'sm' | 'md' | 'lg';
 	} & HTMLAttributes<HTMLButtonElement>;
 
 	const {
@@ -16,12 +17,19 @@
 		hoverBgColor = 'hover:bg-neutral-white',
 		hoverTextColor = 'hover:text-primary-900',
 		children,
+		size = 'md',
 		...rest
 	}: Props = $props();
+
+	const sizeClasses = {
+		sm: 'text-sm px-2 py-1 font-regular',
+		md: 'text-base px-4 py-2 font-semibold',
+		lg: 'text-lg px-5 py-3 font-semibold'
+	};
 </script>
 
 <button
-	class={`px-4 py-2 font-main font-semibold ${bgColor} ${textColor} ${hoverBgColor} ${hoverTextColor}`}
+	class={`font-mono ${bgColor} ${textColor} ${hoverBgColor} ${hoverTextColor} ${sizeClasses[size]}`}
 	{...rest}
 >
 	{@render children()}

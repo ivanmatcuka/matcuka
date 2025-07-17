@@ -26,7 +26,10 @@ services:
       - "1337:1337"
     environment:
       - NODE_ENV=development
-      # Add your env variables here or mount .env file
     volumes:
-      - .:/app
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
     restart: unless-stopped

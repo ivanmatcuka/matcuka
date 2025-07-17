@@ -1,45 +1,37 @@
-<script>
+<script lang="ts">
 	import Tag from '$components/Tag/Tag.svelte';
 	import Header from '$components/Header/Header.svelte';
 	import Section from '$components/Sections/Section.svelte';
 	import Typography from '$components/Typography/Typography.svelte';
-	import { onMount } from 'svelte';
 	import Button from '$components/Button/Button.svelte';
-	import WorkCard from '$components/WorkCard/WorkCard.svelte';
-	import { CMSService } from '../services/cmsService';
-
-	onMount(async () => {
-		// const workCards = await CMSService.getWorkCards();
-		// console.log(workCards);
-	});
+	import Projects from '../composables/Projects.svelte';
 </script>
 
-<div class="flex flex-col items-center gap-20 bg-primary-900 py-10">
+<div class="bg-primary-900 flex min-h-screen flex-col items-center gap-20 py-10">
 	<Header />
 	<div class="text-center">
-		<Typography variant="h1" color="neutral-white">ivan matcuka</Typography>
-		<div>
-			<Typography variant="subtitle1" color="accent-200">web? mobile? design?</Typography>
-			<br />
-			<Typography variant="subtitle1" color="accent-200">can do_</Typography>
-			<br />
-			<div class="mt-4">
-				<Button
-					bgColor="bg-primary-300"
-					textColor="text-primary-900"
-					hoverBgColor="hover:bg-neutral-white"
-					hoverTextColor="hover:text-primary-900">Download CV</Button
-				>
+		<div class="flex flex-col items-center gap-4">
+			<Typography variant="h1" color="neutral-white">ivan matcuka</Typography>
+			<div>
+				<Typography variant="subtitle1" color="accent-200">web? mobile? design?</Typography>
+				<br />
+				<Typography variant="subtitle1" color="accent-200">can do_</Typography>
 			</div>
+			<Button
+				bgColor="bg-primary-300"
+				textColor="text-primary-900"
+				hoverBgColor="hover:bg-neutral-white"
+				hoverTextColor="hover:text-primary-900">Download CV</Button
+			>
 		</div>
 	</div>
 	<Section>
 		<div class="flex justify-between">
 			<div>
-				<Typography variant="subtitle2" color="accent-200">BRIEF SUMMARY</Typography>
+				<Typography variant="h4" color="accent-200">brief summary</Typography>
 			</div>
 
-			<div class="basis-[70%] border-l-2 border-solid border-accent-200 pl-3">
+			<div class="border-accent-200 basis-[70%] border-l-2 border-solid pl-3">
 				<Typography variant="body2" color="accent-100"
 					>Experienced full-stack developer, with over 8 years of experience creating dynamic
 					websites and applications for various industries.</Typography
@@ -60,7 +52,7 @@
 	<Section>
 		<Typography variant="h2" color="primary-800">education</Typography>
 		<div
-			class="flex w-full flex-col items-center gap-3 border-2 border-solid border-primary-800 p-3"
+			class="border-primary-800 flex w-full flex-col items-center gap-3 border-2 border-solid p-3"
 		>
 			<Typography variant="subtitle1" color="primary-800"
 				>bachelor of applied informatics</Typography
@@ -76,7 +68,7 @@
 				programming languages such as Java, C# and C++; basics of computer graphics; linear algebra;
 				etc.
 			</Typography>
-			<div class="flex w-full gap-2 border-t-2 border-solid border-primary-800 pt-3">
+			<div class="border-primary-800 flex w-full gap-2 border-t-2 border-solid pt-3">
 				<Tag variant="education">C++</Tag>
 				<Tag variant="education">C#</Tag>
 				<Tag variant="education">Java</Tag>
@@ -96,38 +88,7 @@
 <div class="bg-neutral-white">
 	<Section>
 		<Typography variant="h2" color="neutral-black">my work</Typography>
-		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-			<WorkCard
-				title="botspot"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-			<WorkCard
-				title="politzek"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-			<WorkCard
-				title="cofenster"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-			<WorkCard
-				title="botspot"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-			<WorkCard
-				title="politzek"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-			<WorkCard
-				title="cofenster"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et risus orci. Etiam venenatis, diam."
-				imageUrl="/images/work/web-development.jpg"
-			/>
-		</div>
+		<Projects />
 	</Section>
 </div>
 

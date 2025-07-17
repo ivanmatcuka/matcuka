@@ -6,6 +6,7 @@
 		| 'h1'
 		| 'h2'
 		| 'h3'
+		| 'h4'
 		| 'subtitle1'
 		| 'subtitle2'
 		| 'body1'
@@ -15,8 +16,8 @@
 
 	interface Props {
 		variant: Variant;
-		color?: keyof TailwindColors;
 		children: Snippet;
+		color?: keyof TailwindColors;
 		class?: string;
 	}
 
@@ -24,6 +25,7 @@
 		h1: 'text-4xl font-bold font-main',
 		h2: 'text-3xl font-bold font-main',
 		h3: 'text-2xl font-semibold font-main',
+		h4: 'text-xl font-semibold font-main',
 
 		subtitle1: 'text-2xl font-mono',
 		subtitle2: 'text-md font-semibold font-mono',
@@ -68,7 +70,7 @@
 		'primary-900': 'text-primary-900'
 	};
 
-	const { variant, color = 'neutral-white', children, class: customClass }: Props = $props();
+	const { variant, color = 'neutral-white', children, class: customClass = '' }: Props = $props();
 </script>
 
 <span class={`${customClass} ${map[variant]} ${fontColors[color]}`}>

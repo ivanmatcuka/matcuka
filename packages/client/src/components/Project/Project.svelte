@@ -22,7 +22,7 @@
 		'text-primary-800'
 	]);
 
-	const imageClass = jc(['h-[350px]', 'w-full', 'object-cover']);
+	const imageClass = jc(['h-[350px]', 'w-full', 'object-cover', 'object-top']);
 
 	const contentClass = jc(['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'p-2']);
 
@@ -55,7 +55,7 @@
 	<Button
 		bgColor="bg-primary-300"
 		textColor="text-primary-900"
-		hoverBgColor="hover:bg-neutral-white"
-		hoverTextColor="hover:text-primary-900">View Project</Button
+		hoverBgColor="hover:bg-primary-100"
+		hoverTextColor="hover:text-primary-900">OPEN</Button
 	>
 </div>

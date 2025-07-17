@@ -1,22 +1,27 @@
-// import { PUBLIC_API_URL } from '$env/static/public';
+import { PUBLIC_API_URL } from '$env/static/public';
 
-// const API_BASE_URL = PUBLIC_API_URL;
+const API_BASE_URL = (PUBLIC_API_URL || '') + '/api';
 
 export const API = {
-	get<T = unknown>() {
-		return async (url: string): Promise<T> => {
-			try {
-				const response = await fetch('API_BASE_URL' + url);
+	async get<T = unknown>(uri: string, searchParams: Record<string, string> = {}): Promise<T> {
+		try {
+			const url = new URL(API_BASE_URL + uri);
+			url.searchParams.set('populate', '*');
 
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
+			Object.entries(searchParams).forEach(([key, value]) => {
+				url.searchParams.set(key, value);
+			});
 
-				return await response.json();
-			} catch (error) {
-				console.error(`Failed to fetch from ${url}:`, error);
-				throw error;
+			const response = await fetch(url.toString());
+
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
 			}
-		};
+
+			return await response.json();
+		} catch (error) {
+			console.error(`Failed to fetch from ${uri}:`, error);
+			throw error;
+		}
 	}
 };
