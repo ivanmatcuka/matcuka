@@ -1,13 +1,11 @@
-import { PUBLIC_API_URL } from '$env/static/public';
-
-const API_BASE_URL = (PUBLIC_API_URL || '') + '/api';
-
 export const API = {
-	async get<T = unknown>(uri: string, searchParams: Record<string, string> = {}): Promise<T> {
-		try {
-			const url = new URL(API_BASE_URL + uri);
-			url.searchParams.set('populate', '*');
+	async get<T = unknown>(
+		uri: string,
+		searchParams: Record<string, string> = {}
+	): Promise<T | null> {
+		const url = new URL(uri);
 
+		try {
 			Object.entries(searchParams).forEach(([key, value]) => {
 				url.searchParams.set(key, value);
 			});
@@ -21,7 +19,7 @@ export const API = {
 			return await response.json();
 		} catch (error) {
 			console.error(`Failed to fetch from ${uri}:`, error);
-			throw error;
+			return null;
 		}
 	}
 };

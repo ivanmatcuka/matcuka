@@ -25,7 +25,7 @@
 	let { children, variant }: Props = $props();
 </script>
 
-<div class={`border-2 border-solid px-2 py-1 ${borderColors[variant]}`}>
+<div class={`border-2 border-solid px-1 py-0.5 ${borderColors[variant]}`}>
 	<Typography variant="body2" color={textColors[variant]}>
 		{@render children()}
 	</Typography>

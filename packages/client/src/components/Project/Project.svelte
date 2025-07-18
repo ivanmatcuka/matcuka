@@ -11,6 +11,8 @@
 
 	const { title, description, imageUrl }: Props = $props();
 
+	const imageClass = jc(['h-[350px]', 'w-full', 'object-cover', 'object-top']);
+	const contentClass = jc(['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'p-2']);
 	const cardClass = jc([
 		'relative',
 		'flex',
@@ -21,11 +23,6 @@
 		'text-center',
 		'text-primary-800'
 	]);
-
-	const imageClass = jc(['h-[350px]', 'w-full', 'object-cover', 'object-top']);
-
-	const contentClass = jc(['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'p-2']);
-
 	const hrClass = jc([
 		'relative',
 		'box-border',
@@ -35,27 +32,23 @@
 		'border-solid',
 		'border-primary-800'
 	]);
-
-	const titleClass = jc(['!font-medium']);
-
-	const descClass = jc(['self-stretch', 'text-lg']);
 </script>
 
 <div class={cardClass}>
 	<img class={imageClass} alt="" src={imageUrl} />
 	<div class={contentClass}>
-		<Typography variant="h3" color="neutral-black" class={titleClass}>
+		<Typography variant="h3" color="neutral-black" class="!font-medium">
 			{title}
 		</Typography>
 		<hr class={hrClass} />
-		<Typography class={descClass} variant="body1" color="neutral-black">
+		<Typography class="text-lg" variant="body1" color="neutral-black">
 			{description}
 		</Typography>
 	</div>
 	<Button
-		bgColor="bg-primary-300"
-		textColor="text-primary-900"
-		hoverBgColor="hover:bg-primary-100"
+		bgColor="bg-neutral-black"
+		textColor="text-neutral-white"
+		hoverBgColor="hover:bg-primary-300"
 		hoverTextColor="hover:text-primary-900">OPEN</Button
 	>
 </div>

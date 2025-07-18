@@ -4,7 +4,18 @@
 	import Section from '$components/Sections/Section.svelte';
 	import Typography from '$components/Typography/Typography.svelte';
 	import Button from '$components/Button/Button.svelte';
+
 	import Projects from '../composables/Projects.svelte';
+	import CodeCards from '../composables/CodeCards.svelte';
+	import Contacts from '../composables/Contacts.svelte';
+	import Jobs from '../composables/Jobs.svelte';
+	import { onMount } from 'svelte';
+	import { cmsService } from '../services/cmsService';
+
+	onMount(async () => {
+		const metadata = await cmsService.getMetadata();
+		console.log('Metadata:', metadata);
+	});
 </script>
 
 <div class="bg-primary-900 flex min-h-screen flex-col items-center gap-20 py-10">
@@ -68,7 +79,7 @@
 				programming languages such as Java, C# and C++; basics of computer graphics; linear algebra;
 				etc.
 			</Typography>
-			<div class="border-primary-800 flex w-full gap-2 border-t-2 border-solid pt-3">
+			<div class="border-primary-800 flex w-full flex-wrap gap-2 border-t-2 border-solid pt-3">
 				<Tag variant="education">C++</Tag>
 				<Tag variant="education">C#</Tag>
 				<Tag variant="education">Java</Tag>
@@ -79,9 +90,10 @@
 	</Section>
 </div>
 
-<div class="bg-primary-900">
+<div class="bg-primary-900 overflow-x-hidden">
 	<Section>
 		<Typography variant="h2" color="primary-100">previous jobs</Typography>
+		<Jobs />
 	</Section>
 </div>
 
@@ -95,11 +107,13 @@
 <div class="bg-accent-100">
 	<Section>
 		<Typography variant="h2" color="accent-800">my code</Typography>
+		<CodeCards />
 	</Section>
 </div>
 
 <div class="bg-primary-900">
 	<Section>
 		<Typography variant="h2" color="primary-100">contacts</Typography>
+		<Contacts />
 	</Section>
 </div>

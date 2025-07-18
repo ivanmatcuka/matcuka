@@ -5,7 +5,7 @@
 </script>
 
 <Tabs
-	defaultTab="mobile"
+	defaultTab="web"
 	tabs={[
 		{ name: 'web', content: WebProjects },
 		{ name: 'mobile', content: MobileProjects }
