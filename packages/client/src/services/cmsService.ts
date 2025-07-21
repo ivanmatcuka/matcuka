@@ -1,6 +1,40 @@
 import { API } from '../utils/api';
 import { PUBLIC_API_URL, PUBLIC_CMS_URL } from '$env/static/public';
 
+type CvData = {
+	id: number;
+	attributes: {
+		name: string;
+		alternativeText: string | null;
+		caption: string | null;
+		width: number | null;
+		height: number | null;
+		formats: unknown;
+		hash: string;
+		ext: string;
+		mime: string;
+		size: number;
+		url: string;
+		previewUrl: string | null;
+		provider: string;
+		provider_metadata: unknown | null;
+		createdAt: string;
+		updatedAt: string;
+	};
+};
+
+export type Meta = {
+	summary: string;
+	headline: string;
+	subline: string;
+	title: string;
+	description: string | null;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+	cv: { data: CvData };
+};
+
 export type ProjectResponse = { title: string; excerpt: string; image: Response<{ url: string }> };
 export type RenderedProject = { title: string; excerpt: string; image: string };
 
@@ -48,11 +82,11 @@ export const cmsService = {
 		});
 	},
 
-	async getMetadata(): Promise<unknown> {
-		const response = await API.get<Response<unknown>>(API_BASE_URL + '/meta', { populate: '*' });
-		const data = Array.isArray(response?.data) ? response.data : [];
+	async getMetadata(): Promise<Meta | undefined> {
+		const response = await API.get<Response<Meta>>(API_BASE_URL + '/meta', { populate: '*' });
+		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
-		return data;
+		return data?.attributes;
 	},
 
 	async getProjectsByType(type: string): Promise<RenderedProject[]> {
@@ -74,5 +108,20 @@ export const cmsService = {
 				image: CMS_URL + image
 			};
 		});
+	},
+
+	async downloadCV(): Promise<string> {
+		const response = await API.get<Response<Meta>>(API_BASE_URL + '/meta', {
+			populate: 'cv'
+		});
+
+		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
+
+		if (data?.attributes?.cv?.data) {
+			const cvUrl = CMS_URL + data.attributes.cv.data.attributes.url;
+			return cvUrl;
+		}
+
+		throw new Error('CV not found');
 	}
 };

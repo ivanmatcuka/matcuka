@@ -11,7 +11,14 @@ export default {
 				'2xl': '40px',
 				'3xl': '48px',
 				'4xl': '60px',
-				inherit: 'inherit'
+				inherit: 'inherit',
+
+				'res-sm': '12px',
+				'res-md': '14px',
+				'res-xl': '24px',
+				'res-2xl': '36px',
+				'res-3xl': '40px',
+				'res-4xl': '48px'
 			},
 			fontFamily: {
 				mono: "'Azeret Mono'",

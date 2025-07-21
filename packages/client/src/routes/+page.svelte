@@ -3,67 +3,24 @@
 	import Header from '$components/Header/Header.svelte';
 	import Section from '$components/Sections/Section.svelte';
 	import Typography from '$components/Typography/Typography.svelte';
-	import Button from '$components/Button/Button.svelte';
 
 	import Projects from '../composables/Projects.svelte';
 	import CodeCards from '../composables/CodeCards.svelte';
 	import Contacts from '../composables/Contacts.svelte';
 	import Jobs from '../composables/Jobs.svelte';
-	import { onMount } from 'svelte';
-	import { cmsService } from '../services/cmsService';
-
-	onMount(async () => {
-		const metadata = await cmsService.getMetadata();
-		console.log('Metadata:', metadata);
-	});
+	import Head from '../composables/Head.svelte';
 </script>
 
-<div class="bg-primary-900 flex min-h-screen flex-col items-center gap-20 py-10">
+<div class="bg-primary-900 flex min-h-screen flex-col items-center gap-10 py-5 sm:gap-20 sm:py-10">
 	<Header />
-	<div class="text-center">
-		<div class="flex flex-col items-center gap-4">
-			<Typography variant="h1" color="neutral-white">ivan matcuka</Typography>
-			<div>
-				<Typography variant="subtitle1" color="accent-200">web? mobile? design?</Typography>
-				<br />
-				<Typography variant="subtitle1" color="accent-200">can do_</Typography>
-			</div>
-			<Button
-				bgColor="bg-primary-300"
-				textColor="text-primary-900"
-				hoverBgColor="hover:bg-neutral-white"
-				hoverTextColor="hover:text-primary-900">Download CV</Button
-			>
-		</div>
-	</div>
-	<Section>
-		<div class="flex justify-between">
-			<div>
-				<Typography variant="h4" color="accent-200">brief summary</Typography>
-			</div>
-
-			<div class="border-accent-200 basis-[70%] border-l-2 border-solid pl-3">
-				<Typography variant="body2" color="accent-100"
-					>Experienced full-stack developer, with over 8 years of experience creating dynamic
-					websites and applications for various industries.</Typography
-				>
-				<br />
-				<br />
-				<Typography variant="body2" color="accent-100"
-					>TypeScript is my go-to language for both back-end and front-end development, that allows
-					me to create efficient and scalable solutions. Plus, I've got solid skills in PHP, Ruby
-					and basic skills in Python.</Typography
-				>
-			</div>
-		</div>
-	</Section>
+	<Head />
 </div>
 
 <div class="bg-primary-100">
 	<Section>
 		<Typography variant="h2" color="primary-800">education</Typography>
 		<div
-			class="border-primary-800 flex w-full flex-col items-center gap-3 border-2 border-solid p-3"
+			class="border-primary-800 flex w-full flex-col items-center gap-3 border-2 border-solid p-3 text-center"
 		>
 			<Typography variant="subtitle1" color="primary-800"
 				>bachelor of applied informatics</Typography

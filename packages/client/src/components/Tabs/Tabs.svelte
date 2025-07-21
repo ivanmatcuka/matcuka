@@ -16,12 +16,10 @@
 		<Button
 			onclick={() => (activeTab = tab.name)}
 			size="sm"
-			bgColor={activeTab === tab.name ? 'bg-neutral-black' : 'bg-neutral-white'}
-			textColor={activeTab === tab.name ? 'text-neutral-white' : 'text-neutral-black'}
-			hoverBgColor={activeTab === tab.name ? 'hover:bg-neutral-black' : 'hover:bg-primary-300'}
-			hoverTextColor={activeTab === tab.name
-				? 'hover:text-neutral-white'
-				: 'hover:text-neutral-black'}
+			bgColor={activeTab === tab.name ? 'neutral-black' : 'neutral-white'}
+			textColor={activeTab === tab.name ? 'neutral-white' : 'neutral-black'}
+			hoverBgColor={activeTab === tab.name ? 'neutral-black' : 'primary-300'}
+			hoverTextColor={activeTab === tab.name ? 'neutral-white' : 'neutral-black'}
 		>
 			{tab.name}
 		</Button>

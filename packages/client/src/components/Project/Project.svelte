@@ -46,9 +46,9 @@
 		</Typography>
 	</div>
 	<Button
-		bgColor="bg-neutral-black"
-		textColor="text-neutral-white"
-		hoverBgColor="hover:bg-primary-300"
-		hoverTextColor="hover:text-primary-900">OPEN</Button
+		bgColor="neutral-black"
+		textColor="neutral-white"
+		hoverBgColor="primary-300"
+		hoverTextColor="primary-900">OPEN</Button
 	>
 </div>

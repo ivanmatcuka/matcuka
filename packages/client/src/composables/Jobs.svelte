@@ -13,7 +13,7 @@
 	const skills = $derived(jobs[activeJobIdxex]?.skills ?? []);
 
 	onMount(async () => {
-		jobs = (await cmsService.getJobs()) ?? [];
+		jobs = await cmsService.getJobs();
 	});
 </script>
 
@@ -23,6 +23,8 @@
 		onActivate={(index) => (activeJobIdxex = index)}
 	/>
 </div>
+
+<hr class="border-primary-100 -mt-10 w-screen border-b-2 border-solid" />
 
 <div class="border-primary-100 flex w-full flex-col items-center gap-3 border-2 border-solid p-3">
 	{#if jobs[activeJobIdxex]?.description}

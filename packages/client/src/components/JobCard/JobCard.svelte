@@ -21,7 +21,7 @@
 		.toLowerCase();
 </script>
 
-<div class="">
+<div class="relative">
 	<Typography variant="subtitle2" color="neutral-white">
 		{title}
 	</Typography>
@@ -37,7 +37,7 @@
 	</div>
 	<div class="flex gap-1">
 		<Typography variant="body1" color="primary-100">
-			{formattedFrom}{` — ${formattedTo || 'present'}`}
+			{formattedFrom}{`—${formattedTo || 'present'}`}
 		</Typography>
 	</div>
 	{#if location}
@@ -47,4 +47,7 @@
 			</Typography>
 		</div>
 	{/if}
+	<div
+		class="border-primary-100 bg-primary-900 -mb-2 mt-4 h-4 w-4 rounded-full border border-[5px]"
+	></div>
 </div>
