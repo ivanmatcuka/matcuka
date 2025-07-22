@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: matcuka-strapi
-    container_name: matcuka-strapi
+    container_name: matcuka_strapi
     ports:
       - "1338:1337"
     environment:
@@ -23,21 +23,3 @@ services:
     restart: unless-stopped
     networks:
       - proxy-network
-
-  strapi-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    image: matcuka-strapi-dev
-    container_name: matcuka-strapi-dev
-    ports:
-      - "1338:1337"
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./config:/opt/app/config
-      - ./src:/opt/app/src
-      - ./package.json:/opt/package.json
-      - ./.env:/opt/app/.env
-      - ./public/uploads:/opt/app/public/uploads
-    restart: unless-stopped
