@@ -9,5 +9,6 @@ services:
     container_name: matcuka_svelte
     ports:
       - 4173:4173
+    restart: unless-stopped
     networks:
       - proxy-network
