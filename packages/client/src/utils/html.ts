@@ -1,3 +1,0 @@
-export const applyNewLineBreaks = (text: string): string => {
-	return text.replace(/\n/g, '<br />');
-};

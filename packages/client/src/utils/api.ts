@@ -5,11 +5,11 @@ export const API = {
 	): Promise<T | null> {
 		const url = new URL(uri);
 
-		try {
-			Object.entries(searchParams).forEach(([key, value]) => {
-				url.searchParams.set(key, value);
-			});
+		Object.entries(searchParams).forEach(([key, value]) => {
+			url.searchParams.set(key, value);
+		});
 
+		try {
 			const response = await fetch(url.toString());
 
 			if (!response.ok) {

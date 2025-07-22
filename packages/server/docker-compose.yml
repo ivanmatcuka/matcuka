@@ -6,14 +6,16 @@ services:
     image: matcuka-strapi
     container_name: matcuka-strapi
     ports:
-      - "1337:1337"
+      - "1338:1337"
     environment:
       - NODE_ENV=production
-      # Add your env variables here or mount .env file
     volumes:
-      - ./packages/server/public:/app/public
-      - ./packages/server/.tmp:/app/.tmp
-      - ./packages/server/uploads:/app/uploads
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
     restart: unless-stopped
 
   strapi-dev:
@@ -23,7 +25,7 @@ services:
     image: matcuka-strapi-dev
     container_name: matcuka-strapi-dev
     ports:
-      - "1337:1337"
+      - "1338:1337"
     environment:
       - NODE_ENV=development
     volumes:

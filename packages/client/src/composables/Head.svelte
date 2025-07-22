@@ -43,7 +43,7 @@
 
 {#if metadata?.summary}
 	<Section>
-		<div class="flex flex-col justify-between gap-2 sm:flex-row sm:gap-0">
+		<div class="flex flex-col justify-between gap-4 sm:flex-row sm:gap-0">
 			<div>
 				<Typography variant="h4" color="accent-200">brief summary</Typography>
 			</div>

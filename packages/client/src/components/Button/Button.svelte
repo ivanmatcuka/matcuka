@@ -3,6 +3,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { TailwindColors } from '../../types';
+	import { jc } from '$lib/utils';
 
 	type Props = {
 		bgColor: keyof TailwindColors;
@@ -164,12 +165,17 @@
 		md: 'px-4 py-2 font-semibold',
 		lg: 'px-5 py-3 font-semibold'
 	};
+
+	const classes = jc([
+		bgColorClasses[bgColor],
+		textColorClasses[textColor],
+		hoverTextColorClasses[hoverTextColor],
+		hoverBgColorClasses[hoverBgColor],
+		sizeClasses[size]
+	]);
 </script>
 
-<button
-	class={`${bgColorClasses[bgColor]} ${textColorClasses[textColor]} ${hoverTextColorClasses[hoverTextColor]} ${hoverBgColorClasses[hoverBgColor]} ${sizeClasses[size]}`}
-	{...rest}
->
+<button class={classes} {...rest}>
 	<Typography variant="body2">
 		{@render children()}</Typography
 	>

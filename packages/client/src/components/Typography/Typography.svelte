@@ -27,7 +27,7 @@
 		h3: 'sm:text-2xl text-res-2xl font-semibold font-main',
 		h4: 'sm:text-xl text-res-xl font-semibold font-main',
 
-		subtitle1: 'sm:text-2xl text-res-2xl font-mono',
+		subtitle1: 'sm:text-xl text-res-xl font-mono',
 		subtitle2: 'sm:text-md text-res-md font-semibold font-mono',
 
 		body1: 'sm:text-md text-res-md font-mono',

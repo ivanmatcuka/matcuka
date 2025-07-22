@@ -11,7 +11,6 @@ export default {
 				'2xl': '40px',
 				'3xl': '48px',
 				'4xl': '60px',
-				inherit: 'inherit',
 
 				'res-sm': '12px',
 				'res-md': '14px',
