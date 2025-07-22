@@ -6,6 +6,8 @@ services:
   matcuka-svelte:
     build: .
     image: matcuka-svelte
+    container_name: matcuka_svelte
     ports:
       - 4173:4173
-    container_name: matcuka_svelte
+    networks:
+      - proxy-network
