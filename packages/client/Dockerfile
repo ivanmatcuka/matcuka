@@ -3,10 +3,10 @@ FROM node:20
 # Create app directory
 WORKDIR /usr/src/app
 
-COPY ./app/package*.json ./
+COPY ./package*.json ./
 RUN npm ci
 
-COPY ./app ./
+COPY . ./
 RUN npm install
 
 RUN npm run build
