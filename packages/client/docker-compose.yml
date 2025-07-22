@@ -7,5 +7,5 @@ services:
     build: .
     image: matcuka-svelte
     ports:
-      - 5173:5173
+      - 4173:4173
     container_name: matcuka_svelte
