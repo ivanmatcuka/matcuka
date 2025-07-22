@@ -3,7 +3,7 @@ networks:
     external: true
 
 services:
-  app-server:
+  matcuka-svelte:
     build: .
     image: matcuka-svelte
     ports:
