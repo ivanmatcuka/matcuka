@@ -9,13 +9,13 @@
 		<Typography variant="body1" color="accent-200">~/index.html</Typography>
 	</div>
 	<div class="flex flex-row justify-end gap-3 sm:gap-6">
-		<a href="/portfolio" class="hover:underline">
+		<a href="#" class="hover:underline">
 			<Typography variant="body1" color="accent-200">portfolio</Typography>
 		</a>
-		<a href="/code" class="hover:underline">
+		<a href="#" class="hover:underline">
 			<Typography variant="body1" color="accent-200">code</Typography>
 		</a>
-		<a href="/contact" class="hover:underline">
+		<a href="#" class="hover:underline">
 			<Typography variant="body1" color="accent-200">contact</Typography>
 		</a>
 	</div>
