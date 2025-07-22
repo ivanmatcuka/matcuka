@@ -10,7 +10,7 @@ services:
     image: matcuka-strapi
     container_name: matcuka_strapi
     ports:
-      - "1338:1337"
+      - 1338:1337
     environment:
       - NODE_ENV=production
     volumes:
