@@ -1,0 +1,11 @@
+networks:
+  proxy-network:
+    external: true
+
+services:
+  app-server:
+    build: .
+    image: matcuka-svelte
+    ports:
+      - 5173:5173
+    container_name: matcuka_svelte
