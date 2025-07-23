@@ -3,13 +3,13 @@
 	import Typography from '$components/Typography/Typography.svelte';
 	import Button from '$components/Button/Button.svelte';
 	import { onMount } from 'svelte';
-	import { cmsService, type Meta } from '../services/cmsService';
+	import { cmsService, type MetaResponse } from '../services/cmsService';
 	import { downloadFileFromBlob } from '../utils/download';
 	import { PUBLIC_CV_FILENAME } from '$env/static/public';
 
 	const CV_FILENAME = PUBLIC_CV_FILENAME;
 
-	let metadata = $state<Meta>();
+	let metadata = $state<MetaResponse>();
 
 	onMount(async () => (metadata = await cmsService.getMetadata()));
 

@@ -13,13 +13,14 @@
 
 <div class="flex items-center gap-2">
 	{#each tabs as tab}
+		{@const isActive = activeTab === tab.name}
 		<Button
 			onclick={() => (activeTab = tab.name)}
 			size="sm"
-			bgColor={activeTab === tab.name ? 'neutral-black' : 'neutral-white'}
-			textColor={activeTab === tab.name ? 'neutral-white' : 'neutral-black'}
-			hoverBgColor={activeTab === tab.name ? 'neutral-black' : 'primary-300'}
-			hoverTextColor={activeTab === tab.name ? 'neutral-white' : 'neutral-black'}
+			bgColor={isActive ? 'neutral-black' : 'neutral-white'}
+			textColor={isActive ? 'neutral-white' : 'neutral-black'}
+			hoverBgColor={isActive ? 'neutral-black' : 'primary-300'}
+			hoverTextColor={isActive ? 'neutral-white' : 'neutral-black'}
 		>
 			{tab.name}
 		</Button>

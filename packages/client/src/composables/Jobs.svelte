@@ -35,7 +35,7 @@
 	{#if skills}
 		<div class="border-primary-100 flex w-full flex-wrap gap-2 border-t-2 border-solid pt-3">
 			{#each skills as skill}
-				<Tag variant="work">{skill}</Tag>
+				<Tag variant="work">{skill.text}</Tag>
 			{/each}
 		</div>
 	{/if}

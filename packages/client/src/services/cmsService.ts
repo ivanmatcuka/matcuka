@@ -1,60 +1,30 @@
 import { API } from '../utils/api';
 import { PUBLIC_API_URL, PUBLIC_CMS_URL } from '$env/static/public';
+import type {
+	ApiJobJob,
+	ApiMetaMeta,
+	ApiProjectProject,
+	ApiSkillSkill
+} from '../../../server/types/generated/contentTypes';
 
-type CvData = {
-	id: number;
-	attributes: {
-		name: string;
-		alternativeText: string | null;
-		caption: string | null;
-		width: number | null;
-		height: number | null;
-		formats: unknown;
-		hash: string;
-		ext: string;
-		mime: string;
-		size: number;
-		url: string;
-		previewUrl: string | null;
-		provider: string;
-		provider_metadata: unknown | null;
-		createdAt: string;
-		updatedAt: string;
-	};
+export type MetaResponse = Omit<ApiMetaMeta['attributes'], 'cv'> & {
+	cv?: { url: string };
 };
-
-export type Meta = {
-	summary: string;
-	headline: string;
-	subline: string;
-	title: string;
-	description: string | null;
-	createdAt: string;
-	updatedAt: string;
-	publishedAt: string;
-	cv: { data: CvData };
+export type ProjectResponse = Omit<ApiProjectProject['attributes'], 'image'> & {
+	image?: { url: string };
 };
-
-export type ProjectResponse = { title: string; excerpt: string; image: Response<{ url: string }> };
-export type RenderedProject = { title: string; excerpt: string; image: string };
-
-export type JobResponse = {
-	title: string;
-	company?: string;
-	type: string;
-	from: string;
-	to?: string;
-	location?: string;
-	description: string;
-	createdAt: string;
-	updatedAt: string;
-	publishedAt: string;
-	skills?: Response<{ text: string }>;
+export type RenderedProject = Pick<ApiProjectProject['attributes'], 'title' | 'excerpt'> & {
+	image?: string;
 };
-export type RenderedJob = Omit<
-	JobResponse,
-	'createdAt' | 'updatedAt' | 'publishedAt' | 'skills'
-> & { skills: string[] };
+export type JobResponse = Omit<ApiJobJob['attributes'], 'skills'> & {
+	skills: ApiSkillSkill['attributes'][];
+};
+export type RenderedJob = Pick<
+	ApiJobJob['attributes'],
+	'company' | 'description' | 'from' | 'to' | 'title' | 'type'
+> & {
+	skills: ApiSkillSkill['attributes'][];
+};
 
 export type ResponseData<T> = { attributes: T; id: number };
 export type Response<T> = {
@@ -68,22 +38,24 @@ const CMS_URL = PUBLIC_CMS_URL;
 export const cmsService = {
 	async getJobs(): Promise<RenderedJob[]> {
 		const response = await API.get<Response<JobResponse>>(API_BASE_URL + '/jobs', {
-			populate: '*'
+			populate: '*',
+			'sort[0]': 'from'
 		});
+
 		const data = Array.isArray(response?.data) ? response.data : [];
 
 		return data.map((attributes) => {
-			const skills = Array.isArray(attributes.skills) ? attributes.skills : attributes.skills?.data;
-			const mappedSkills = Array.isArray(skills)
-				? skills.map((skill) => skill?.attributes?.text)
-				: [];
+			const skills = Array.isArray(attributes.skills) ? attributes.skills : [attributes.skills];
+			const mappedSkills = Array.isArray(skills) ? skills.map((skill) => skill) : [];
 
 			return { ...attributes, skills: mappedSkills };
 		});
 	},
 
-	async getMetadata(): Promise<Meta | undefined> {
-		const response = await API.get<Response<Meta>>(API_BASE_URL + '/meta', { populate: '*' });
+	async getMetadata(): Promise<MetaResponse | undefined> {
+		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
+			populate: '*'
+		});
 		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
 		return data;
@@ -98,9 +70,7 @@ export const cmsService = {
 		const data = Array.isArray(response?.data) ? response.data : [];
 
 		return data.map((project) => {
-			const image = Array.isArray(project.image?.data)
-				? project.image.data[0]?.url
-				: project.image?.data?.url;
+			const image = Array.isArray(project.image) ? project.image[0]?.url : project.image?.url;
 
 			return {
 				title: project.title,
@@ -111,14 +81,14 @@ export const cmsService = {
 	},
 
 	async downloadCV(): Promise<string> {
-		const response = await API.get<Response<Meta>>(API_BASE_URL + '/meta', {
+		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
 			populate: 'cv'
 		});
 
 		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
-		if (data?.cv?.data) {
-			const cvUrl = CMS_URL + data.cv.data.attributes.url;
+		if (data?.cv) {
+			const cvUrl = CMS_URL + data.cv.url;
 			return cvUrl;
 		}
 

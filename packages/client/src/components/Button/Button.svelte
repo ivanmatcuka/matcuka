@@ -166,13 +166,15 @@
 		lg: 'px-5 py-3 font-semibold'
 	};
 
-	const classes = jc([
-		bgColorClasses[bgColor],
-		textColorClasses[textColor],
-		hoverTextColorClasses[hoverTextColor],
-		hoverBgColorClasses[hoverBgColor],
-		sizeClasses[size]
-	]);
+	const classes = $derived(
+		jc([
+			bgColorClasses[bgColor],
+			textColorClasses[textColor],
+			hoverTextColorClasses[hoverTextColor],
+			hoverBgColorClasses[hoverBgColor],
+			sizeClasses[size]
+		])
+	);
 </script>
 
 <button class={classes} {...rest}>
