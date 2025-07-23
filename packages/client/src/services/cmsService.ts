@@ -58,7 +58,7 @@ export type RenderedJob = Omit<
 
 export type ResponseData<T> = { attributes: T; id: number };
 export type Response<T> = {
-	data: ResponseData<T> | ResponseData<T>[];
+	data: T | T[];
 	meta?: Record<string, unknown>;
 };
 
@@ -72,7 +72,7 @@ export const cmsService = {
 		});
 		const data = Array.isArray(response?.data) ? response.data : [];
 
-		return data.map(({ attributes }) => {
+		return data.map((attributes) => {
 			const skills = Array.isArray(attributes.skills) ? attributes.skills : attributes.skills?.data;
 			const mappedSkills = Array.isArray(skills)
 				? skills.map((skill) => skill?.attributes?.text)
@@ -86,7 +86,7 @@ export const cmsService = {
 		const response = await API.get<Response<Meta>>(API_BASE_URL + '/meta', { populate: '*' });
 		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
-		return data?.attributes;
+		return data;
 	},
 
 	async getProjectsByType(type: string): Promise<RenderedProject[]> {
@@ -98,13 +98,13 @@ export const cmsService = {
 		const data = Array.isArray(response?.data) ? response.data : [];
 
 		return data.map((project) => {
-			const image = Array.isArray(project.attributes.image?.data)
-				? project.attributes.image.data[0]?.attributes?.url
-				: project.attributes.image?.data?.attributes?.url;
+			const image = Array.isArray(project.image?.data)
+				? project.image.data[0]?.url
+				: project.image?.data?.url;
 
 			return {
-				title: project.attributes.title,
-				excerpt: project.attributes.excerpt,
+				title: project.title,
+				excerpt: project.excerpt,
 				image: CMS_URL + image
 			};
 		});
@@ -117,8 +117,8 @@ export const cmsService = {
 
 		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
-		if (data?.attributes?.cv?.data) {
-			const cvUrl = CMS_URL + data.attributes.cv.data.attributes.url;
+		if (data?.cv?.data) {
+			const cvUrl = CMS_URL + data.cv.data.attributes.url;
 			return cvUrl;
 		}
 
