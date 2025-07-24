@@ -9,18 +9,21 @@ export type MetaResponse = {
 	description?: string;
 	cv?: { url: string };
 };
+
 export type ProjectResponse = {
 	title?: string;
 	excerpt?: string;
 	url?: string;
 	image?: { url: string };
 };
+
 export type RenderedProject = {
 	title?: string;
 	excerpt?: string;
 	image?: string;
 	url?: string;
 };
+
 export type JobResponse = {
 	skills?: unknown[];
 };
@@ -64,6 +67,7 @@ export const cmsService = {
 		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
 			populate: '*'
 		});
+
 		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
 
 		return data;

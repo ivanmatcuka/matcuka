@@ -3,7 +3,7 @@
 </script>
 
 <header
-	class="m-auto flex h-[72px] w-full max-w-[290px] flex-col items-center justify-center px-2 sm:max-w-[1110px] sm:flex-row sm:justify-between"
+	class="m-auto flex h-[72px] w-full max-w-xs flex-col items-center justify-center px-2 sm:max-w-5xl sm:flex-row sm:justify-between"
 >
 	<div>
 		<Typography variant="body1" color="accent-200">~/index.html</Typography>
