@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Typography from '$components/Typography/Typography.svelte';
+	import { formatJobDate } from '$lib/utils';
 
 	export type JobProps = {
 		title: string;
@@ -11,14 +12,8 @@
 	};
 	const { title, company, type, from, to, location }: JobProps = $props();
 
-	const fromDate = new Date(from);
-	const toDate = to ? new Date(to) : null;
-	const formattedFrom = fromDate
-		.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-		.toLowerCase();
-	const formattedTo = toDate
-		?.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-		.toLowerCase();
+	const fromString = formatJobDate(from);
+	const toString = to ? formatJobDate(to) : 'present';
 </script>
 
 <div class="relative">
@@ -37,7 +32,7 @@
 	</div>
 	<div class="flex gap-1">
 		<Typography variant="body1" color="primary-100">
-			{formattedFrom}{`—${formattedTo || 'present'}`}
+			{fromString}-{toString}
 		</Typography>
 	</div>
 	{#if location}
@@ -48,6 +43,16 @@
 		</div>
 	{/if}
 	<div
-		class="border-primary-100 bg-primary-900 -mb-2 mt-4 h-4 w-4 rounded-full border border-[5px]"
+		class={[
+			'border-primary-100',
+			'border',
+			'border-[5px]',
+			'bg-primary-900',
+			'-mb-2',
+			'mt-4',
+			'h-4',
+			'w-4',
+			'rounded-full'
+		]}
 	></div>
 </div>

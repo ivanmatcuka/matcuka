@@ -61,21 +61,21 @@
 	</Section>
 </div>
 
-<div class="bg-neutral-white">
+<div class="bg-neutral-white" id="portfolio">
 	<Section>
 		<Typography variant="h2" color="neutral-black">my work</Typography>
 		<Projects />
 	</Section>
 </div>
 
-<div class="bg-accent-100">
+<div class="bg-accent-100" id="code">
 	<Section>
 		<Typography variant="h2" color="accent-800">my code</Typography>
 		<CodeCards />
 	</Section>
 </div>
 
-<div class="bg-primary-900">
+<div class="bg-primary-900" id="contacts">
 	<Section>
 		<Typography variant="h2" color="primary-100">contacts</Typography>
 		<Contacts />

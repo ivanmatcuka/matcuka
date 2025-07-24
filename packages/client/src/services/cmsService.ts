@@ -25,7 +25,7 @@ export type RenderedProject = {
 };
 
 export type JobResponse = {
-	skills?: unknown[];
+	skills?: { text: string }[];
 };
 
 export type RenderedJob = {
@@ -39,7 +39,7 @@ export type RenderedJob = {
 };
 
 export type Response<T> = {
-	data: T | T[];
+	data: T;
 	meta?: Record<string, unknown>;
 };
 
@@ -48,62 +48,51 @@ const CMS_URL = PUBLIC_CMS_URL;
 
 export const cmsService = {
 	async getJobs(): Promise<RenderedJob[]> {
-		const response = await API.get<Response<JobResponse>>(API_BASE_URL + '/jobs', {
+		const response = await API.get<Response<JobResponse[]>>(API_BASE_URL + '/jobs', {
 			populate: '*',
 			'sort[0]': 'from'
 		});
 
-		const data = Array.isArray(response?.data) ? response.data : [];
+		if (!response?.data) return [];
 
-		return data.map((attributes) => {
-			const skills = Array.isArray(attributes.skills) ? attributes.skills : [attributes.skills];
-			const mappedSkills = Array.isArray(skills)
-				? skills.map((skill) => skill as { text: string })
-				: [];
-
-			return { ...attributes, skills: mappedSkills };
-		});
+		return response.data;
 	},
 
-	async getMetadata(): Promise<MetaResponse | undefined> {
+	async getMetadata(): Promise<MetaResponse | null> {
 		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
 			populate: '*'
 		});
 
-		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
+		if (!response?.data) return null;
 
-		return data;
+		return response.data;
 	},
 
 	async getProjectsByType(type: string): Promise<RenderedProject[]> {
-		const response = await API.get<Response<ProjectResponse>>(API_BASE_URL + '/projects', {
+		const response = await API.get<Response<ProjectResponse[]>>(API_BASE_URL + '/projects', {
 			'filters[type][$eq]': type,
 			populate: '*'
 		});
 
-		const data = Array.isArray(response?.data) ? response.data : [];
+		if (!response?.data) return [];
 
-		return data.map((project) => {
-			const image = Array.isArray(project.image) ? project.image[0]?.url : project.image?.url;
-
-			return {
-				title: project.title,
-				excerpt: project.excerpt,
-				image: CMS_URL + image,
-				url: project.url
-			};
-		});
+		return response.data.map((project) => ({
+			title: project.title,
+			excerpt: project.excerpt,
+			image: CMS_URL + project.image?.url,
+			url: project.url
+		}));
 	},
 
-	async downloadCV(): Promise<string> {
+	async downloadCV(): Promise<string | null> {
 		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
 			populate: 'cv'
 		});
 
-		const data = Array.isArray(response?.data) ? response.data[0] : response?.data;
+		if (!response?.data) return null;
 
-		if (data?.cv) {
-			const cvUrl = CMS_URL + data.cv.url;
+		if (response.data.cv) {
+			const cvUrl = CMS_URL + response.data.cv.url;
 			return cvUrl;
 		}
 

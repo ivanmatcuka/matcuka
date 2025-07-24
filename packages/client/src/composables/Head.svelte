@@ -9,7 +9,7 @@
 
 	const CV_FILENAME = PUBLIC_CV_FILENAME;
 
-	let metadata = $state<MetaResponse>();
+	let metadata = $state<MetaResponse | null>(null);
 
 	onMount(async () => (metadata = await cmsService.getMetadata()));
 

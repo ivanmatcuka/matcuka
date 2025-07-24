@@ -27,7 +27,18 @@
 <hr class="border-primary-100 -mt-10 w-screen border-b-2 border-solid" />
 
 <div
-	class="border-primary-100 flex w-full flex-col items-center gap-3 whitespace-pre-line border-2 border-solid p-2"
+	class={[
+		'border-primary-100',
+		'flex',
+		'w-full',
+		'flex-col',
+		'items-center',
+		'gap-3',
+		'whitespace-pre-line',
+		'border-2',
+		'border-solid',
+		'p-2'
+	]}
 >
 	{#if jobs[activeJobIdxex]?.description}
 		<Typography variant="body1" color="neutral-white">
@@ -35,7 +46,18 @@
 		</Typography>
 	{/if}
 	{#if skills}
-		<div class="border-primary-100 flex w-full flex-wrap gap-2 border-t-2 border-solid pt-3">
+		<div
+			class={[
+				'border-primary-100',
+				'flex',
+				'w-full',
+				'flex-wrap',
+				'gap-2',
+				'border-t-2',
+				'border-solid',
+				'pt-3'
+			]}
+		>
 			{#each skills as skill}
 				<Tag variant="work">{skill.text}</Tag>
 			{/each}

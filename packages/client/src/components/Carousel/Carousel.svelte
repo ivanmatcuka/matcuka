@@ -23,7 +23,7 @@
 </script>
 
 <div class="relative">
-	<div class="flex gap-10 transition-transform" style={`transform: translateX(-${offset}px);`}>
+	<div class="flex gap-10 transition-transform" style:transform={`translateX(-${offset}px`}>
 		{#each [...items] as item, index}
 			{@const Component = item.component}
 
