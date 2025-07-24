@@ -10,7 +10,7 @@
 		'flex-col',
 		'items-center',
 		'gap-10',
-		'px-2',
+		'px-3',
 		'py-8',
 		'sm:max-w-5xl',
 		'md:py-10'
