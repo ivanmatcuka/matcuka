@@ -22,14 +22,29 @@
 		<Typography variant="body1" color="accent-200">~/index.html</Typography>
 	</div>
 	<div class="flex flex-row justify-end gap-3 sm:gap-6">
-		<a href="#portfolio" class="hover:underline">
-			<Typography variant="body1" color="accent-200">portfolio</Typography>
+		<a href="#portfolio">
+			<Typography
+				variant="body1"
+				color="accent-200"
+				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
+				>portfolio</Typography
+			>
 		</a>
 		<a href="#code" class="hover:underline">
-			<Typography variant="body1" color="accent-200">code</Typography>
+			<Typography
+				variant="body1"
+				color="accent-200"
+				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
+				>code</Typography
+			>
 		</a>
 		<a href="#contacts" class="hover:underline">
-			<Typography variant="body1" color="accent-200">contacts</Typography>
+			<Typography
+				variant="body1"
+				color="accent-200"
+				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
+				>contacts</Typography
+			>
 		</a>
 	</div>
 </header>

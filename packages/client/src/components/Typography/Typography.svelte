@@ -18,7 +18,7 @@
 		variant: Variant;
 		children: Snippet;
 		color?: keyof TailwindColors;
-		class?: string;
+		class?: string | string[];
 	}
 
 	const map: Record<Variant, string> = {
