@@ -26,7 +26,9 @@
 
 <hr class="border-primary-100 -mt-10 w-screen border-b-2 border-solid" />
 
-<div class="border-primary-100 flex w-full flex-col items-center gap-3 border-2 border-solid p-2">
+<div
+	class="border-primary-100 flex w-full flex-col items-center gap-3 whitespace-pre-line border-2 border-solid p-2"
+>
 	{#if jobs[activeJobIdxex]?.description}
 		<Typography variant="body1" color="neutral-white">
 			{jobs[activeJobIdxex]?.description}
