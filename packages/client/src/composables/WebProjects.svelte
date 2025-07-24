@@ -11,7 +11,7 @@
 </script>
 
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-	{#each projects as { title, excerpt, image }}
-		<Project {title} description={excerpt} imageUrl={image} />
+	{#each projects as { title = '', excerpt = '', image, url = '#' }}
+		<Project {title} description={excerpt} imageUrl={image} {url} />
 	{/each}
 </div>

@@ -12,12 +12,14 @@ export type MetaResponse = {
 export type ProjectResponse = {
 	title?: string;
 	excerpt?: string;
+	url?: string;
 	image?: { url: string };
 };
 export type RenderedProject = {
 	title?: string;
 	excerpt?: string;
 	image?: string;
+	url?: string;
 };
 export type JobResponse = {
 	skills?: unknown[];
@@ -81,7 +83,8 @@ export const cmsService = {
 			return {
 				title: project.title,
 				excerpt: project.excerpt,
-				image: CMS_URL + image
+				image: CMS_URL + image,
+				url: project.url
 			};
 		});
 	},

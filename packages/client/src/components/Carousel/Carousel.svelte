@@ -28,7 +28,13 @@
 			{@const Component = item.component}
 
 			<button
-				class={`${index === activeIndex ? 'opacity-100' : 'opacity-50'} min-w-fit text-left hover:opacity-75`}
+				class={[
+					'min-w-fit text-left',
+					{
+						'opacity-100': index === activeIndex,
+						'opacity-50  hover:opacity-75': index !== activeIndex
+					}
+				]}
 				aria-label={`Select item ${index + 1}`}
 				onclick={() => handleClick(index)}
 				bind:this={refs[index]}

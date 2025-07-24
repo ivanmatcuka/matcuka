@@ -12,7 +12,7 @@
 </script>
 
 <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
-	{#each repos as { name, description, stargazers_count, topics }}
-		<CodeCard title={name} {description} stars={stargazers_count} tags={topics} />
+	{#each repos as { name, description, stargazers_count, topics, html_url }}
+		<CodeCard title={name} {description} stars={stargazers_count} tags={topics} url={html_url} />
 	{/each}
 </div>

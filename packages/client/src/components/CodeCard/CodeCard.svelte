@@ -7,11 +7,12 @@
 	interface Props {
 		title: string;
 		description: string;
+		url: string;
 		stars?: number;
 		tags?: string[];
 	}
 
-	const { title, description, stars, tags = [] }: Props = $props();
+	const { title, description, stars, tags, url = [] }: Props = $props();
 
 	const cardClass = jc([
 		'relative',
@@ -34,7 +35,7 @@
 	]);
 </script>
 
-<div class={cardClass}>
+<a href={url} target="_blank" class={cardClass}>
 	<div class="flex flex-col gap-2 p-2">
 		<div class="flex items-center justify-between">
 			<Typography variant="h3" color="accent-800" class="!font-medium">
@@ -59,4 +60,4 @@
 			{/each}
 		</div>
 	</div>
-</div>
+</a>

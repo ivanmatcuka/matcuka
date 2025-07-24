@@ -12,15 +12,19 @@
 		hoverTextColor: keyof TailwindColors;
 		children: Snippet;
 		size?: 'sm' | 'md' | 'lg';
-	} & HTMLAttributes<HTMLButtonElement>;
+		href?: string;
+		target?: string;
+	} & HTMLAttributes<HTMLButtonElement> &
+		HTMLAttributes<HTMLAnchorElement>;
 
 	const {
 		bgColor,
 		textColor,
 		hoverBgColor,
 		hoverTextColor,
-		children,
+		href,
 		size = 'md',
+		children,
 		...rest
 	}: Props = $props();
 
@@ -177,8 +181,16 @@
 	);
 </script>
 
-<button class={classes} {...rest}>
-	<Typography variant="body2">
-		{@render children()}</Typography
-	>
-</button>
+{#if href}
+	<a class={classes} {href} {...rest}>
+		<Typography variant="body2">
+			{@render children()}</Typography
+		>
+	</a>
+{:else}
+	<button class={classes} {...rest}>
+		<Typography variant="body2">
+			{@render children()}</Typography
+		>
+	</button>
+{/if}

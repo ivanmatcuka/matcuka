@@ -6,10 +6,11 @@
 	interface Props {
 		title: string;
 		description: string;
+		url: string;
 		imageUrl?: string;
 	}
 
-	const { title, description, imageUrl }: Props = $props();
+	const { title, description, imageUrl, url }: Props = $props();
 
 	const imageClass = jc(['h-[350px]', 'w-full', 'object-cover', 'object-top']);
 	const contentClass = jc(['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'p-2']);
@@ -49,6 +50,8 @@
 		bgColor="neutral-black"
 		textColor="neutral-white"
 		hoverBgColor="primary-300"
-		hoverTextColor="primary-900">OPEN</Button
+		hoverTextColor="primary-900"
+		href={url}
+		target="_blank">OPEN</Button
 	>
 </div>
