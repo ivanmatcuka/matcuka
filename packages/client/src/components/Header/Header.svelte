@@ -18,9 +18,9 @@
 		'sm:justify-between'
 	]}
 >
-	<div>
+	<a href="/">
 		<Typography variant="body1" color="accent-200">~/index.html</Typography>
-	</div>
+	</a>
 	<div class="flex flex-row justify-end gap-3 sm:gap-6">
 		<a href="#portfolio">
 			<Typography
