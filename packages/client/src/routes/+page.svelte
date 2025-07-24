@@ -27,7 +27,7 @@
 	<Section>
 		<Typography variant="h2" color="primary-800">education</Typography>
 		<div
-			class="border-primary-800 flex w-full flex-col items-center gap-3 border-2 border-solid p-3 text-center"
+			class="border-primary-800 flex w-full flex-col items-center gap-3 border-2 border-solid p-2 text-center"
 		>
 			<Typography variant="subtitle1" color="primary-800"
 				>bachelor of applied informatics</Typography

@@ -35,7 +35,7 @@ export type RenderedJob = {
 	to?: string;
 	title?: string;
 	type?: string;
-	skills?: unknown[];
+	skills?: { text: string }[];
 };
 
 export type Response<T> = {
@@ -57,7 +57,9 @@ export const cmsService = {
 
 		return data.map((attributes) => {
 			const skills = Array.isArray(attributes.skills) ? attributes.skills : [attributes.skills];
-			const mappedSkills = Array.isArray(skills) ? skills.map((skill) => skill) : [];
+			const mappedSkills = Array.isArray(skills)
+				? skills.map((skill) => skill as { text: string })
+				: [];
 
 			return { ...attributes, skills: mappedSkills };
 		});
