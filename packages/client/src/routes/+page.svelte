@@ -9,7 +9,14 @@
 	import Contacts from '../composables/Contacts.svelte';
 	import Jobs from '../composables/Jobs.svelte';
 	import Head from '../composables/Head.svelte';
+
+	const { data } = $props();
 </script>
+
+<svelte:head>
+	<title>{data.meta.title}</title>
+	<meta name="description" content={data.meta.description} />
+</svelte:head>
 
 <div class="bg-primary-900 flex min-h-screen flex-col items-center gap-10 py-5 sm:gap-20 sm:py-10">
 	<Header />

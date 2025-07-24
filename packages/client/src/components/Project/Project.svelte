@@ -6,7 +6,7 @@
 	interface Props {
 		title: string;
 		description: string;
-		imageUrl: string;
+		imageUrl?: string;
 	}
 
 	const { title, description, imageUrl }: Props = $props();

@@ -1,32 +1,38 @@
 import { API } from '../utils/api';
 import { PUBLIC_API_URL, PUBLIC_CMS_URL } from '$env/static/public';
-import type {
-	ApiJobJob,
-	ApiMetaMeta,
-	ApiProjectProject,
-	ApiSkillSkill
-} from '../../../server/types/generated/contentTypes';
 
-export type MetaResponse = Omit<ApiMetaMeta['attributes'], 'cv'> & {
+export type MetaResponse = {
+	title?: string;
+	headline?: string;
+	subline?: string;
+	summary?: string;
+	description?: string;
 	cv?: { url: string };
 };
-export type ProjectResponse = Omit<ApiProjectProject['attributes'], 'image'> & {
+export type ProjectResponse = {
+	title?: string;
+	excerpt?: string;
 	image?: { url: string };
 };
-export type RenderedProject = Pick<ApiProjectProject['attributes'], 'title' | 'excerpt'> & {
+export type RenderedProject = {
+	title?: string;
+	excerpt?: string;
 	image?: string;
 };
-export type JobResponse = Omit<ApiJobJob['attributes'], 'skills'> & {
-	skills: ApiSkillSkill['attributes'][];
-};
-export type RenderedJob = Pick<
-	ApiJobJob['attributes'],
-	'company' | 'description' | 'from' | 'to' | 'title' | 'type'
-> & {
-	skills: ApiSkillSkill['attributes'][];
+export type JobResponse = {
+	skills?: unknown[];
 };
 
-export type ResponseData<T> = { attributes: T; id: number };
+export type RenderedJob = {
+	company?: string;
+	description?: string;
+	from?: string;
+	to?: string;
+	title?: string;
+	type?: string;
+	skills?: unknown[];
+};
+
 export type Response<T> = {
 	data: T | T[];
 	meta?: Record<string, unknown>;

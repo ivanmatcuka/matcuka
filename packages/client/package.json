@@ -27,6 +27,7 @@
 		"@storybook/svelte": "^8.5.2",
 		"@storybook/sveltekit": "^8.5.2",
 		"@storybook/test": "^8.5.2",
+		"@strapi/strapi": "^5.19.0",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
