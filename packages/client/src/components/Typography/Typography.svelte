@@ -73,6 +73,6 @@
 	const { variant, color, children, class: customClass = '' }: Props = $props();
 </script>
 
-<span class={`${customClass} ${map[variant]} ${color ? fontColors[color] : 'text-inherit'}`}>
+<span class={[customClass, map[variant], `${color ? fontColors[color] : 'text-inherit'}`]}>
 	{@render children?.()}
 </span>

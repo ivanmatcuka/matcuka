@@ -3,7 +3,6 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { TailwindColors } from '../../types';
-	import { jc } from '$lib/utils';
 
 	type Props = {
 		bgColor: keyof TailwindColors;
@@ -170,15 +169,13 @@
 		lg: 'px-5 py-3 font-semibold'
 	};
 
-	const classes = $derived(
-		jc([
-			bgColorClasses[bgColor],
-			textColorClasses[textColor],
-			hoverTextColorClasses[hoverTextColor],
-			hoverBgColorClasses[hoverBgColor],
-			sizeClasses[size]
-		])
-	);
+	const classes = $derived([
+		bgColorClasses[bgColor],
+		textColorClasses[textColor],
+		hoverTextColorClasses[hoverTextColor],
+		hoverBgColorClasses[hoverBgColor],
+		sizeClasses[size]
+	]);
 </script>
 
 {#if href}

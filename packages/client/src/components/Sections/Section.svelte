@@ -3,7 +3,18 @@
 </script>
 
 <section
-	class="m-auto flex w-full max-w-xs flex-col items-center gap-10 px-2 py-8 sm:max-w-5xl md:py-10"
+	class={[
+		'm-auto',
+		'flex',
+		'w-full',
+		'flex-col',
+		'items-center',
+		'gap-10',
+		'px-2',
+		'py-8',
+		'sm:max-w-5xl',
+		'md:py-10'
+	]}
 >
 	{@render children()}
 </section>
