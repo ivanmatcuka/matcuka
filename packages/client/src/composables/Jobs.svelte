@@ -24,7 +24,7 @@
 	/>
 </div>
 
-<hr class="border-primary-100 -mt-10 w-screen border-b-2 border-solid" />
+<hr class="border-primary-100 z-10 -mt-10 w-screen border-b-2 border-solid" />
 
 <div
 	class={[

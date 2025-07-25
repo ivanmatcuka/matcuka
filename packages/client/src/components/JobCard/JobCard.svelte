@@ -42,17 +42,5 @@
 			</Typography>
 		</div>
 	{/if}
-	<div
-		class={[
-			'border-primary-100',
-			'border',
-			'border-[5px]',
-			'bg-primary-900',
-			'-mb-2',
-			'mt-4',
-			'h-4',
-			'w-4',
-			'rounded-full'
-		]}
-	></div>
+	<div class="bg-primary-100 mt-4 h-2 w-1"></div>
 </div>

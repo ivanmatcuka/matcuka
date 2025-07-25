@@ -29,7 +29,7 @@
 </script>
 
 <div class="relative" bind:this={containerRef}>
-	<div class="flex gap-10 transition-transform" style:transform={`translateX(-${offset}px`}>
+	<div class="flex gap-6 transition-transform sm:gap-8" style:transform={`translateX(-${offset}px`}>
 		{#each [...items] as item, index}
 			{@const Component = item.component}
 
