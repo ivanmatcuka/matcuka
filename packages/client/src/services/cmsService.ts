@@ -84,7 +84,7 @@ export const cmsService = {
 		}));
 	},
 
-	async downloadCV(): Promise<string | null> {
+	async getCvUrl(): Promise<string | null> {
 		const response = await API.get<Response<MetaResponse>>(API_BASE_URL + '/meta', {
 			populate: 'cv'
 		});

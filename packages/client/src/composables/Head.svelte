@@ -14,11 +14,10 @@
 	onMount(async () => (metadata = await cmsService.getMetadata()));
 
 	const downloadCV = async () => {
-		const response = await cmsService.downloadCV();
+		const response = await cmsService.getCvUrl();
 
 		if (response) {
-			const blob = new Blob([response], { type: 'application/pdf' });
-			downloadFileFromBlob(blob, CV_FILENAME);
+			downloadFileFromBlob(response, CV_FILENAME);
 		}
 	};
 </script>
