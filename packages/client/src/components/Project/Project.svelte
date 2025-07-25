@@ -25,7 +25,7 @@
 	]}
 >
 	<img class={['h-[350px]', 'w-full', 'object-cover', 'object-top']} alt="" src={imageUrl} />
-	<div class={['flex', 'flex-col', 'items-center', 'justify-center', 'gap-2', 'p-2']}>
+	<div class={['flex', 'flex-col', 'flex-1', 'items-center', 'justify-start', 'gap-2', 'p-2']}>
 		<Typography variant="h3" color="neutral-black" class="!font-medium">
 			{title}
 		</Typography>
