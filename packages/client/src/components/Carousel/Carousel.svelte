@@ -10,6 +10,7 @@
 
 	const { items, onActivate }: Props = $props();
 	let refs = $state<HTMLElement[]>([]);
+	let containerRef = $state<HTMLDivElement>();
 	let offset = $state(0);
 
 	const handleClick = (index: number) => {
@@ -18,11 +19,16 @@
 	};
 
 	$effect(() => {
-		offset = refs[activeIndex]?.offsetLeft;
+		if (!containerRef || !refs.length) return;
+
+		const lastRef = refs[refs.length - 1];
+		const maxOffset = lastRef.offsetLeft - containerRef.clientWidth + lastRef.clientWidth;
+
+		offset = Math.min(maxOffset, refs[activeIndex]?.offsetLeft);
 	});
 </script>
 
-<div class="relative">
+<div class="relative" bind:this={containerRef}>
 	<div class="flex gap-10 transition-transform" style:transform={`translateX(-${offset}px`}>
 		{#each [...items] as item, index}
 			{@const Component = item.component}

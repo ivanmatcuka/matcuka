@@ -24,12 +24,16 @@
 
 <div class="text-center">
 	<div class="flex flex-col items-center gap-4">
-		<Typography variant="h1" color="neutral-white">{metadata?.title}</Typography>
-		<div>
-			<Typography variant="subtitle1" color="accent-200">{metadata?.headline}</Typography>
-			<br />
-			<Typography variant="subtitle1" color="accent-200">{metadata?.subline}</Typography>
-		</div>
+		{#if metadata}
+			{@const { title, headline, subline } = metadata}
+
+			<Typography variant="h1" color="neutral-white">{title}</Typography>
+			<div>
+				<Typography variant="subtitle1" color="accent-200">{headline}</Typography>
+				<br />
+				<Typography variant="subtitle1" color="accent-200">{subline}</Typography>
+			</div>
+		{/if}
 		<Button
 			bgColor="primary-300"
 			textColor="primary-900"
@@ -49,7 +53,7 @@
 
 			<div class="border-accent-200 basis-[70%] border-l-2 border-solid pl-3">
 				<Typography variant="body2" color="accent-100" class="whitespace-pre-line"
-					>{metadata?.summary}</Typography
+					>{metadata.summary}</Typography
 				>
 			</div>
 		</div>

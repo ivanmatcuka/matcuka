@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Typography from '$components/Typography/Typography.svelte';
+
+	const linkClass = 'hover:text-accent-100 active:text-neutral-white hover:underline';
 </script>
 
 <header
@@ -20,32 +22,17 @@
 	]}
 >
 	<a href="/">
-		<Typography variant="body1" color="accent-200">~/index.html</Typography>
+		<Typography variant="body1" color="accent-200" class={linkClass}>~/index.html</Typography>
 	</a>
 	<div class="flex flex-row justify-end gap-3 sm:gap-6">
 		<a href="#portfolio">
-			<Typography
-				variant="body1"
-				color="accent-200"
-				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
-				>portfolio</Typography
-			>
+			<Typography variant="body1" color="accent-200" class={linkClass}>portfolio</Typography>
 		</a>
-		<a href="#code" class="hover:underline">
-			<Typography
-				variant="body1"
-				color="accent-200"
-				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
-				>code</Typography
-			>
+		<a href="#code">
+			<Typography variant="body1" color="accent-200" class={linkClass}>code</Typography>
 		</a>
-		<a href="#contacts" class="hover:underline">
-			<Typography
-				variant="body1"
-				color="accent-200"
-				class={['hover:text-accent-100', 'hover:underline', 'active:text-neutral-white']}
-				>contacts</Typography
-			>
+		<a href="#contacts">
+			<Typography variant="body1" color="accent-200" class={linkClass}>contacts</Typography>
 		</a>
 	</div>
 </header>
