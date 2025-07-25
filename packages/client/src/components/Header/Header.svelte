@@ -13,6 +13,7 @@
 		'items-center',
 		'justify-center',
 		'px-2',
+		'gap-2',
 		'sm:max-w-5xl',
 		'sm:flex-row',
 		'sm:justify-between'
