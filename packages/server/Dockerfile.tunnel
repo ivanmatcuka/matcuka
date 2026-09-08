@@ -18,4 +18,4 @@ RUN git clone https://github.com/joaoh82/rustunnel && \
   cargo build --release -p rustunnel-client && \
   install -Dm755 target/release/rustunnel /usr/local/bin/rustunnel
 
-CMD rustunnel http 4173 --server ${TUNNEL_SERVER} --token ${TUNNEL_TOKEN} --local-host habits_frontend --subdomain ${TUNNEL_SUBDOMAIN}
+CMD rustunnel http 1338 --server ${TUNNEL_SERVER} --token ${TUNNEL_TOKEN} --local-host strapi_tunnel --subdomain ${TUNNEL_SUBDOMAIN}
