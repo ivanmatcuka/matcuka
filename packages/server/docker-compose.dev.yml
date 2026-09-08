@@ -24,3 +24,18 @@ services:
     restart: unless-stopped
     networks:
       - proxy-network
+
+  strapi_tunnel:
+    build:
+      context: .
+      dockerfile: Dockerfile.tunnel
+      args:
+        TUNNEL_SUBDOMAIN: ${TUNNEL_SUBDOMAIN}
+        TUNNEL_SERVER: ${TUNNEL_SERVER}
+        TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    env_file:
+      - .env
+    container_name: strapi_tunnel
+    restart: unless-stopped
+    networks:
+      - proxy-network
