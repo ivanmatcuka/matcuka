@@ -19,7 +19,7 @@ services:
       - ./package.json:/opt/package.json
       - ./yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
-      - ./public/uploads:/opt/app/public/uploads
+      - ./public:/opt/app/public
       - ./.tmp/data.db:/opt/app/.tmp/data.db
     restart: unless-stopped
     networks:

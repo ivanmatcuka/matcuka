@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: matcuka-strapi
+    image: matcuka_strapi
     container_name: matcuka_strapi
     ports:
       - 1338:1337
