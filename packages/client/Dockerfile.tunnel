@@ -1,0 +1,21 @@
+FROM node:22.13
+
+ARG TUNNEL_SUBDOMAIN
+ARG TUNNEL_SERVER
+ARG TUNNEL_TOKEN
+
+ENV TUNNEL_SERVER=${TUNNEL_SERVER}
+ENV TUNNEL_SUBDOMAIN=${TUNNEL_SUBDOMAIN}
+ENV TUNNEL_TOKEN=${TUNNEL_TOKEN}
+
+# Rust install
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# rustunnel install
+RUN git clone https://github.com/joaoh82/rustunnel && \
+  cd rustunnel && \
+  cargo build --release -p rustunnel-client && \
+  install -Dm755 target/release/rustunnel /usr/local/bin/rustunnel
+
+CMD rustunnel http 1337 --server ${TUNNEL_SERVER} --token ${TUNNEL_TOKEN} --local-host strapi --subdomain ${TUNNEL_SUBDOMAIN}
