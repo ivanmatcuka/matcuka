@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: ivanmatcuka/matcuka_strapi_dev
+    image: ivanmatcuka/matcuka_strapi
     container_name: matcuka_strapi
     environment:
       - NODE_ENV=development
