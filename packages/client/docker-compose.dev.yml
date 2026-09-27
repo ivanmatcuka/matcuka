@@ -1,6 +1,10 @@
 services:
   matcuka_svelte:
-    build: .
+    build:
+      context: .
+      args:
+        PUBLIC_API_URL: ${PUBLIC_API_URL}
+        PUBLIC_CMS_URL: ${PUBLIC_CMS_URL}
     image: ivanmatcuka/matcuka_svelte
     container_name: matcuka_svelte
     env_file:
