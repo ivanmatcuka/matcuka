@@ -1,17 +1,13 @@
-networks:
-  proxy-network:
-    external: true
-
 services:
   matcuka_svelte:
     build: .
-    image: matcuka_svelte
+    image: ivanmatcuka/matcuka_svelte
     container_name: matcuka_svelte
-    ports:
-      - 4175:4173
+    env_file:
+      - .env
     restart: unless-stopped
     networks:
-      - proxy-network
+      - matcuka_svelte_network
 
   matcuka_tunnel:
     image: matcuka_tunnel
@@ -20,4 +16,8 @@ services:
     container_name: matcuka_tunnel
     restart: unless-stopped
     networks:
-      - proxy-network
+      - matcuka_svelte_network
+
+networks:
+  matcuka_svelte_network:
+    driver: bridge
