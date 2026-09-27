@@ -1,9 +1,9 @@
-<script lang="ts" generics="T">
+<script lang="ts">
 	import type { Component } from 'svelte';
 
 	let activeIndex: number = $state(0);
 
-	interface Props<T extends Record<string, any> = Record<string, any>> {
+	interface Props<T extends Record<string, unknown> = Record<string, unknown>> {
 		items: { props: T; component: Component<T> }[];
 		onActivate: (index: number) => void;
 	}
@@ -30,7 +30,7 @@
 
 <div class="relative" bind:this={containerRef}>
 	<div class="flex gap-6 transition-transform sm:gap-8" style:transform={`translateX(-${offset}px`}>
-		{#each [...items] as item, index}
+		{#each [...items] as item, index (index)}
 			{@const Component = item.component}
 
 			<button

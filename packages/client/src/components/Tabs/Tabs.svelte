@@ -12,7 +12,7 @@
 </script>
 
 <div class="flex items-center gap-2">
-	{#each tabs as tab}
+	{#each tabs as tab, index (index)}
 		{@const isActive = activeTab === tab.name}
 		<Button
 			onclick={() => (activeTab = tab.name)}
@@ -27,7 +27,7 @@
 	{/each}
 </div>
 
-{#each tabs as tab}
+{#each tabs as tab, index (index)}
 	{@const Content = tab.content}
 
 	{#if activeTab === tab.name}

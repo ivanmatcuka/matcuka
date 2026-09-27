@@ -58,7 +58,7 @@
 				'pt-3'
 			]}
 		>
-			{#each skills as skill}
+			{#each skills as skill, index (index)}
 				<Tag variant="work">{skill.text}</Tag>
 			{/each}
 		</div>
