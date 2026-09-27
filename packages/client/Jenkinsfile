@@ -16,46 +16,52 @@ pipeline {
     stages {
         stage('Lint') {
             steps {
-          dir('packages/client') {
-              echo 'Linting....'
-              sh 'npm i'
-              sh 'npm run lint'
+                dir('packages/client') {
+                    echo 'Linting....'
+                    sh 'npm i'
+                    sh 'npm run lint'
+                }
             }
-          }
         }
 
         stage('Set Up Docker') {
-          steps {
-            sh 'chmod +x /usr/local/bin/docker-compose'
-            sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
-          }
+            steps {
+                sh 'chmod +x /usr/local/bin/docker-compose'
+                sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
+            }
         }
 
         stage('Build for Development') {
-          steps {
-            echo 'Building....'
-            sh 'docker-compose -f docker-compose.dev.yml build'
-          }
+            steps {
+                dir('packages/client') {
+                    echo 'Building....'
+                    sh 'docker-compose -f docker-compose.dev.yml build'
+                }
+            }
         }
 
         stage('Push Development Version') {
-          steps {
-            echo 'Pushing....'
-            sh 'docker-compose -f docker-compose.dev.yml push'
-          }
+            steps {
+                dir('packages/client') {
+                    echo 'Pushing....'
+                    sh 'docker-compose -f docker-compose.dev.yml push'
+                }
+            }
         }
 
         stage('Deploy to Development') {
-          steps {
-            echo 'Deploying....'
+            steps {
+                dir('packages/client') {
+                    echo 'Deploying....'
 
-            withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
-              sh 'touch .env'
-              sh 'cat $secretFile > .env'
-              sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker-compose -f docker-compose.dev.yml down'''
-              sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker-compose -f docker-compose.dev.yml up -d'''
+                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker-compose -f docker-compose.dev.yml down'''
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker-compose -f docker-compose.dev.yml up -d'''
+                    }
+                }
             }
-          }
         }
     }
 }
