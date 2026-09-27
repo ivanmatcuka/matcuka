@@ -12,8 +12,8 @@ pipeline {
   stages {
     stage('Lint') {
       steps {
-        dir('packages/client') {
-          echo 'Linting....'
+        echo 'Linting....'
+        dir('./packages/client') {
           sh 'npm i'
           sh 'npm run lint'
         }
@@ -21,34 +21,32 @@ pipeline {
     }
     stage('Set Up Docker') {
       steps {
-        dir('packages/client') {
-          sh 'chmod +x /usr/local/bin/docker-compose'
-          sh ''
-          'docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'
-          ''
-        }
+        sh 'chmod +x /usr/local/bin/docker-compose'
+        sh ''
+        'docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'
+        ''
       }
     }
     stage('Build for Development') {
       steps {
-        dir('packages/client') {
-          echo 'Building....'
+        echo 'Building....'
+        dir('./packages/client') {
           sh 'docker-compose -f docker-compose.dev.yml build'
         }
       }
     }
     stage('Push Development Version') {
       steps {
-        dir('packages/client') {
-          echo 'Pushing....'
+        echo 'Pushing....'
+        dir('./packages/client') {
           sh 'docker-compose -f docker-compose.dev.yml push'
         }
       }
     }
     stage('Deploy to Development') {
       steps {
-        dir('packages/client') {
-          echo 'Deploying....'
+        echo 'Deploying....'
+        dir('./packages/client') {
           withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
             sh 'touch .env'
             sh 'cat $secretFile > .env'
