@@ -8,10 +8,10 @@ services:
     environment:
       - NODE_ENV=development
     ports:
-      - '1337:1337'
+      - 1337:1337
     restart: unless-stopped
     networks:
-      - matcuka_strapi_network
+      - matcuka-strapi-network
     volumes:
       - matcuka-strapi-db:/opt/app/.tmp/data.db
 
@@ -22,10 +22,10 @@ services:
     container_name: strapi_tunnel
     restart: unless-stopped
     networks:
-      - matcuka_strapi_network
+      - matcuka-strapi-network
 
 networks:
-  matcuka_strapi_network:
+  matcuka-strapi-network:
     driver: bridge
 
 volumes:

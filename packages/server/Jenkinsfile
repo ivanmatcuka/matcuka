@@ -28,7 +28,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
                         sh 'touch .env'
                         sh 'cat $secretFile > .env'
-                        sh 'docker compose -f docker-compose.dev.yml build'
+                        sh 'docker compose -f docker-compose.development.yml build'
                     }
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 dir('packages/server') {
                     echo 'Pushing....'
-                    sh 'docker compose -f docker-compose.dev.yml push'
+                    sh 'docker compose -f docker-compose.development.yml push'
                 }
             }
         }
@@ -50,9 +50,9 @@ pipeline {
 
                     withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
                         sh 'touch .env'
-                        sh 'cat $secretFile > .env'
-                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml down'''
-                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml up -d'''
+                        sh 'cat $secretFile > .env ; cat .env'
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down'''
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml up -d'''
                     }
                 }
             }
