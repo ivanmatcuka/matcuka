@@ -34,7 +34,12 @@ pipeline {
             steps {
                 dir('packages/client') {
                     echo 'Building....'
-                    sh 'docker compose -f docker-compose.dev.yml build'
+
+                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                        sh 'docker compose -f docker-compose.dev.yml build'
+                    }
                 }
             }
         }
