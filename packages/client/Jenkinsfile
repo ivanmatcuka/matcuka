@@ -15,8 +15,8 @@ pipeline {
 
     stages {
         stage('Lint') {
-          dir('packages/client') {
             steps {
+          dir('packages/client') {
               echo 'Linting....'
               sh 'npm i'
               sh 'npm run lint'
