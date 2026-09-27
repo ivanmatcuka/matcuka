@@ -22,15 +22,7 @@ pipeline {
 
         stage('Build for Development') {
             steps {
-                dir('packages/server') {
-                    echo 'Building....'
-
-                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
-                        sh 'touch .env'
-                        sh 'cat $secretFile > .env'
-                        sh 'docker compose -f docker-compose.dev.yml build'
-                    }
-                }
+                sh 'docker compose -f docker-compose.dev.yml build'
             }
         }
 
