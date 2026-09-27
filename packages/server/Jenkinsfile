@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs '22.13'
+    }
+
+    environment {
+        DEPLOY_USER = credentials('deploy-user')
+        DEPLOY_HOST = credentials('deploy-host')
+
+        DOCKERHUB_PASSWORD = credentials('dockerhub-password')
+        DOCKERHUB_USER = credentials('dockerhub-username')
+    }
+
+    stages {
+        stage('Set Up Docker') {
+            steps {
+                sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
+            }
+        }
+
+        stage('Build for Development') {
+            steps {
+                dir('packages/server') {
+                    echo 'Building....'
+
+                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                        sh 'docker compose -f docker-compose.dev.yml build'
+                    }
+                }
+            }
+        }
+
+        stage('Push Development Version') {
+            steps {
+                dir('packages/server') {
+                    echo 'Pushing....'
+                    sh 'docker compose -f docker-compose.dev.yml push'
+                }
+            }
+        }
+
+        stage('Deploy to Development') {
+            steps {
+                dir('packages/server') {
+                    echo 'Deploying....'
+
+                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml down'''
+                        sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.dev.yml up -d'''
+                    }
+                }
+            }
+        }
+    }
+}

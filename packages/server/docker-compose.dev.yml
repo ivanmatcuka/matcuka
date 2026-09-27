@@ -1,29 +1,19 @@
-networks:
-  proxy-network:
-    external: true
-
 services:
-  strapi:
+  matcuka_strapi:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: matcuka_strapi_dev
+    image: ivanmatcuka/matcuka_strapi_dev
     container_name: matcuka_strapi
-    ports:
-      - 1338:1337
     environment:
       - NODE_ENV=development
-    volumes:
-      - ./config:/opt/app/config
-      - ./src:/opt/app/src
-      - ./package.json:/opt/package.json
-      - ./yarn.lock:/opt/yarn.lock
-      - ./.env:/opt/app/.env
-      - ./public:/opt/app/public
-      - ./.tmp/data.db:/opt/app/.tmp/data.db
+    ports:
+      - '1337:1337'
     restart: unless-stopped
     networks:
-      - proxy-network
+      - matcuka_strapi_network
+    volumes:
+      - matcuka-strapi-db:/opt/app/.tmp/data.db
 
   strapi_tunnel:
     image: matcuka_tunnel
@@ -32,4 +22,11 @@ services:
     container_name: strapi_tunnel
     restart: unless-stopped
     networks:
-      - proxy-network
+      - matcuka_strapi_network
+
+networks:
+  matcuka_strapi_network:
+    driver: bridge
+
+volumes:
+  matcuka-strapi-db:
