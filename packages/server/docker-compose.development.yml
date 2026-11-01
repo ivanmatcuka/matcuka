@@ -1,25 +1,27 @@
 services:
-  matcuka_strapi:
+  matcuka-strapi:
+    image: ivanmatcuka/matcuka-strapi
+    container_name: matcuka-strapi
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    image: ivanmatcuka/matcuka_strapi
-    container_name: matcuka_strapi
+      dockerfile: Dockerfile
+    
     environment:
       - NODE_ENV=development
-    ports:
-      - 1337:1337
+      
     restart: unless-stopped
     networks:
       - matcuka-strapi-network
     volumes:
       - matcuka-strapi-db:/opt/app/.tmp/data.db
 
-  strapi_tunnel:
-    image: matcuka_tunnel
+  matcuka-strapi-tunnel:
+    image: ivanmatcuka/matcuka_tunnel
+    container_name: matcuka-strapi-tunnel
+
     env_file:
       - .env
-    container_name: strapi_tunnel
+      
     restart: unless-stopped
     networks:
       - matcuka-strapi-network
