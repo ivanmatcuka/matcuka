@@ -4,8 +4,12 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
+# Create SQLite DB
+WORKDIR /opt/app/.tmp
+RUN touch data.db
+
+# Install the app
 WORKDIR /usr/src/app
-RUN touch /opt/app/.tmp/data.db
 COPY . .
 RUN npm i
 
