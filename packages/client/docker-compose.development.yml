@@ -1,27 +1,31 @@
 services:
-  matcuka_svelte:
+  matcuka-svelte-dev:
+    container_name: matcuka-svelte-dev
+    image: ivanmatcuka/matcuka-svelte-dev
     build:
       context: .
       args:
         PUBLIC_API_URL: ${PUBLIC_API_URL}
         PUBLIC_CMS_URL: ${PUBLIC_CMS_URL}
-    image: ivanmatcuka/matcuka_svelte
-    container_name: matcuka_svelte
+        
     env_file:
       - .env
-    restart: unless-stopped
-    networks:
-      - matcuka-svelte-network
 
-  matcuka_tunnel:
-    image: matcuka_tunnel
-    env_file:
-      - .env
-    container_name: matcuka_tunnel
     restart: unless-stopped
     networks:
-      - matcuka-svelte-network
+      - matcuka-svelte-network-dev
+
+  matcuka-svelte-tunnel-dev:
+    image: ivanmatcuka/matcuka_tunnel
+
+    env_file:
+      - .env
+
+    container_name: matcuka_tunnel
+
+    restart: unless-stopped
+    networks:
+      - matcuka-svelte-network-dev
 
 networks:
-  matcuka-svelte-network:
-    driver: bridge
+  matcuka-svelte-network-dev:

@@ -5,6 +5,7 @@ ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
+RUN touch /opt/app/.tmp/data.db
 COPY . .
 RUN npm i
 
