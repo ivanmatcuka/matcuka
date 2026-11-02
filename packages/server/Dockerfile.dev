@@ -6,7 +6,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 # Create SQLite DB
 WORKDIR /opt/app/.tmp
-RUN touch data.db
+RUN mkdir data.db
 
 # Install the app
 WORKDIR /usr/src/app
