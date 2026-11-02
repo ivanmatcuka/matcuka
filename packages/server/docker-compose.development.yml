@@ -13,7 +13,7 @@ services:
     networks:
       - matcuka-strapi-network-dev
     volumes:
-      - matcuka-db-dev:/opt/app/.tmp/data.db
+      - matcuka-db-dev:/opt/app/.tmp
 
   matcuka-strapi-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel
