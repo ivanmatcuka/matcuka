@@ -32,9 +32,11 @@ pipeline {
 
         stage('Set Up .env') {
             steps {
-                withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
-                    sh 'touch .env'
-                    sh 'cat $secretFile > .env'
+                dir('packages/client') {
+                    withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                    }
                 }
             }
         }
