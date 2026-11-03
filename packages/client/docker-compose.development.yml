@@ -2,7 +2,7 @@ services:
   matcuka-svelte-dev:
     container_name: matcuka-svelte-dev
     image: ivanmatcuka/matcuka-svelte-dev
-    
+
     build:
       context: .
       args:
