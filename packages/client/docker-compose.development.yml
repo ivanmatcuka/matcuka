@@ -2,6 +2,7 @@ services:
   matcuka-svelte-dev:
     container_name: matcuka-svelte-dev
     image: ivanmatcuka/matcuka-svelte-dev
+    
     build:
       context: .
       args:
@@ -17,11 +18,10 @@ services:
 
   matcuka-svelte-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel
+    container_name: matcuka-svelte-tunnel-dev
 
     env_file:
       - .env
-
-    container_name: matcuka_tunnel
 
     restart: unless-stopped
     networks:
