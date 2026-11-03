@@ -5,10 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    
+
     environment:
       - NODE_ENV=development
-      
+
     restart: unless-stopped
     networks:
       - matcuka-strapi-network-dev
@@ -21,7 +21,7 @@ services:
 
     env_file:
       - .env
-      
+
     restart: unless-stopped
     networks:
       - matcuka-strapi-network-dev
