@@ -119,6 +119,10 @@ pipeline {
         }
 
         stage('Deploy to Production') {
+            when {
+                buildingTag()
+            }
+
             steps {
                 dir('packages/server') {
                     echo 'Deploying....'
