@@ -12,8 +12,23 @@ services:
     restart: unless-stopped
     networks:
       - matcuka-strapi-network-dev
+
+  matcuka-db-dev:
+    platform: linux/x86_64
+    container_name: matcuka-db-dev
+    restart: unless-stopped
+    image: mariadb
+
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USERNAME}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD}
+
     volumes:
-      - matcuka-db-dev:/opt/app/.tmp
+      - matcuka-db-dev:/var/lib/mysql
+    networks:
+      - matcuka-strapi-network-dev
 
   matcuka-strapi-tunnel-dev:
     image: ivanmatcuka/matcuka_tunnel
