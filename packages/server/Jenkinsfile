@@ -53,7 +53,7 @@ pipeline {
             steps {
                 dir('packages/server') {
                     echo 'Deploying....'
-                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down'''
+                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down --rmi all'''
                     sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml up -d'''
                 }
             }
