@@ -20,10 +20,15 @@ pipeline {
             }
         }
 
-        stage('Set Up .env') {
+        stage('Set Up Development .env') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/server') {
                     withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
+                        sh 'rm -f .env'
                         sh 'touch .env'
                         sh 'cat $secretFile > .env'
                     }
@@ -32,6 +37,10 @@ pipeline {
         }
 
         stage('Build for Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/server') {
                     echo 'Building....'
@@ -41,6 +50,10 @@ pipeline {
         }
 
         stage('Push Development Version') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/server') {
                     echo 'Pushing....'
@@ -50,11 +63,67 @@ pipeline {
         }
 
         stage('Deploy to Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/server') {
                     echo 'Deploying....'
                     sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down --rmi all'''
                     sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml up -d'''
+                }
+            }
+        }
+
+        stage('Set Up Production .env') {
+            when {
+                buildingTag()
+            }
+
+            steps {
+                dir('packages/server') {
+                    withCredentials([file(credentialsId: 'env-production', variable: 'secretFile')]) {
+                        sh 'rm -f .env'
+                        sh 'touch .env'
+                        sh 'cat $secretFile > .env'
+                    }
+                }
+            }
+        }
+
+        stage('Build for Production') {
+            when {
+                buildingTag()
+            }
+
+            steps {
+                dir('packages/server') {
+                    echo 'Building....'
+                    sh 'docker compose -f docker-compose.yml build'
+                }
+            }
+        }
+
+        stage('Push Production Version') {
+            when {
+                buildingTag()
+            }
+
+            steps {
+                dir('packages/server') {
+                    echo 'Pushing....'
+                    sh 'docker compose -f docker-compose.yml push'
+                }
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                dir('packages/server') {
+                    echo 'Deploying....'
+                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml down --rmi all'''
+                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml up -d'''
                 }
             }
         }

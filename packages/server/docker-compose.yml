@@ -5,17 +5,30 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    
+
     environment:
       - NODE_ENV=production
-      
+
     restart: unless-stopped
     networks:
       - matcuka-strapi-network
+
+  matcuka-db:
+    platform: linux/x86_64
+    container_name: matcuka-db
+    restart: unless-stopped
+    image: mariadb
+
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USERNAME}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD}
+
     volumes:
-      - matcuka-strapi-db:/opt/app/.tmp/data.db
-      - matcuka-strapi-uploads:/opt/app/public/uploads
-      - matcuka-strapi-uploads:/opt/app/config
+      - matcuka-db:/var/lib/mysql
+    networks:
+      - matcuka-strapi-network
 
   matcuka-strapi-tunnel:
     image: ivanmatcuka/matcuka_tunnel
@@ -23,7 +36,7 @@ services:
 
     env_file:
       - .env
-      
+
     restart: unless-stopped
     networks:
       - matcuka-strapi-network
@@ -33,6 +46,4 @@ networks:
     driver: bridge
 
 volumes:
-  matcuka-strapi-db:
-  matcuka-strapi-uploads:
-  matcuka-strapi-config:
+  matcuka-db:
