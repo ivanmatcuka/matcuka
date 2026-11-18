@@ -14,18 +14,8 @@ services:
 
     restart: unless-stopped
     networks:
-      - matcuka-svelte-network-dev
-
-  matcuka-svelte-tunnel-dev:
-    image: ivanmatcuka/matcuka_tunnel
-    container_name: matcuka-svelte-tunnel-dev
-
-    env_file:
-      - .env
-
-    restart: unless-stopped
-    networks:
-      - matcuka-svelte-network-dev
+      - caddy-network
 
 networks:
-  matcuka-svelte-network-dev:
+  caddy-network:
+    external: true
