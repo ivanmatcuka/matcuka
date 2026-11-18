@@ -12,6 +12,7 @@ services:
     restart: unless-stopped
     networks:
       - matcuka-strapi-network-dev
+      - caddy-network
 
   matcuka-db-dev:
     platform: linux/x86_64
@@ -29,7 +30,6 @@ services:
       - matcuka-db-dev:/var/lib/mysql
     networks:
       - matcuka-strapi-network-dev
-      - caddy-network
 
 networks:
   matcuka-strapi-network-dev:
