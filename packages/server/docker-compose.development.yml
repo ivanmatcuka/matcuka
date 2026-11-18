@@ -32,6 +32,7 @@ services:
       - caddy-network
 
 networks:
+  matcuka-strapi-network-dev:
   caddy-network:
     external: true
 
