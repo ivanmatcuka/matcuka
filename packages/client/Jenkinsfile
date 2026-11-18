@@ -14,7 +14,21 @@ pipeline {
     }
 
     stages {
+        stage('Set Up Docker') {
+            when {
+                branch 'development'
+            }
+
+            steps {
+                sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
+            }
+        }
+
         stage('Lint') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/client') {
                     echo 'Linting....'
@@ -24,13 +38,11 @@ pipeline {
             }
         }
 
-        stage('Set Up Docker') {
-            steps {
-                sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
-            }
-        }
-
         stage('Set Up .env') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/client') {
                     withCredentials([file(credentialsId: 'env-development', variable: 'secretFile')]) {
@@ -42,15 +54,23 @@ pipeline {
         }
 
         stage('Build for Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/client') {
                     echo 'Building....'
-                    sh 'docker compose -f docker-compose.development.yml build'
+                    sh 'docker compose -f docker-compose.development.yml build --no-cache'
                 }
             }
         }
 
         stage('Push Development Version') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/client') {
                     echo 'Pushing....'
@@ -60,10 +80,14 @@ pipeline {
         }
 
         stage('Deploy to Development') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 dir('packages/client') {
                     echo 'Deploying....'
-                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down'''
+                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml down --rmi all'''
                     sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.development.yml up -d'''
                 }
             }

@@ -15,6 +15,10 @@ pipeline {
 
     stages {
         stage('Set Up Docker') {
+            when {
+                branch 'development'
+            }
+
             steps {
                 sh '''docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}'''
             }
@@ -76,61 +80,61 @@ pipeline {
             }
         }
 
-        stage('Set Up Production .env') {
-            when {
-                buildingTag()
-            }
+        // stage('Set Up Production .env') {
+        //     when {
+        //         buildingTag()
+        //     }
 
-            steps {
-                dir('packages/server') {
-                    withCredentials([file(credentialsId: 'env-production', variable: 'secretFile')]) {
-                        sh 'rm -f .env'
-                        sh 'touch .env'
-                        sh 'cat $secretFile > .env'
-                    }
-                }
-            }
-        }
+        //     steps {
+        //         dir('packages/server') {
+        //             withCredentials([file(credentialsId: 'env-production', variable: 'secretFile')]) {
+        //                 sh 'rm -f .env'
+        //                 sh 'touch .env'
+        //                 sh 'cat $secretFile > .env'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Build for Production') {
-            when {
-                buildingTag()
-            }
+        // stage('Build for Production') {
+        //     when {
+        //         buildingTag()
+        //     }
 
-            steps {
-                dir('packages/server') {
-                    echo 'Building....'
-                    sh 'docker compose -f docker-compose.yml build'
-                }
-            }
-        }
+        //     steps {
+        //         dir('packages/server') {
+        //             echo 'Building....'
+        //             sh 'docker compose -f docker-compose.yml build'
+        //         }
+        //     }
+        // }
 
-        stage('Push Production Version') {
-            when {
-                buildingTag()
-            }
+        // stage('Push Production Version') {
+        //     when {
+        //         buildingTag()
+        //     }
 
-            steps {
-                dir('packages/server') {
-                    echo 'Pushing....'
-                    sh 'docker compose -f docker-compose.yml push'
-                }
-            }
-        }
+        //     steps {
+        //         dir('packages/server') {
+        //             echo 'Pushing....'
+        //             sh 'docker compose -f docker-compose.yml push'
+        //         }
+        //     }
+        // }
 
-        stage('Deploy to Production') {
-            when {
-                buildingTag()
-            }
+        // stage('Deploy to Production') {
+        //     when {
+        //         buildingTag()
+        //     }
 
-            steps {
-                dir('packages/server') {
-                    echo 'Deploying....'
-                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml down --rmi all'''
-                    sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml up -d'''
-                }
-            }
-        }
+        //     steps {
+        //         dir('packages/server') {
+        //             echo 'Deploying....'
+        //             sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml down --rmi all'''
+        //             sh '''DOCKER_HOST=ssh://${DEPLOY_USER}@${DEPLOY_HOST} docker compose -f docker-compose.yml up -d'''
+        //         }
+        //     }
+        // }
     }
 
     post {
