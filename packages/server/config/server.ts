@@ -4,5 +4,9 @@ export default ({ env }) => ({
 	app: {
 		url: env('PUBLIC_URL', '0.0.0.0'),
 		keys: env.array('APP_KEYS')
+	},
+	proxy: {
+		koa: true,
+		maxIpsCount: 1
 	}
 });
