@@ -10,7 +10,9 @@ export default (config: UserConfig) => {
 			}
 		},
 		server: {
+			hmr: false,
+			ws: false,
 			allowedHosts: true
 		}
-	});
+	} as UserConfig);
 };
