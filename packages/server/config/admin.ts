@@ -1,4 +1,6 @@
-export default ({ env }) => ({
+import { Core } from '@strapi/strapi';
+
+export default ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => ({
 	url: '/cms/admin',
 	auth: {
 		secret: env('ADMIN_JWT_SECRET')
